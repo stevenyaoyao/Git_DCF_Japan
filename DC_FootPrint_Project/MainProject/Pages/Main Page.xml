@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-07-07 14:53:02" NeedsCompiledModel="false">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Navigation Object">
+		<Location top="90" left="408" bottom="630" right="894" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="E8F0E142-DE83-4DA0-B70D-410CB18E800E" Name="Navigation Object Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Display>Button+Text</Display>
+		<Spacing>6</Spacing>
+		<BackgroundColor RGB="#ffffff" />
+		<NavigationData>
+			<ReferencePage>ThisPage</ReferencePage>
+			<NumberOfGenerations>1</NumberOfGenerations>
+		</NavigationData>
+	</PageObject>
+	<UsedReferences>
+		<Model />
+	</UsedReferences>
+</Page>

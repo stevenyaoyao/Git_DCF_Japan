@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Template" PageGUID="528AAE31-4B46-4980-8F32-8E6DFECFA3C5">
+		<Template Name="Input Data Template" PageGUID="EE207145-270D-4BB6-BC48-44215C4DCFE2">
+			<Page Name="Input Data Page" PageGUID="D272A8E6-3971-4DCC-9101-0A326C069821" />
+			<Page Name="Input Data - SKU" PageGUID="4030C6E7-E345-447E-BACB-51D4329849E0" />
+			<Page Name="Input Data - Plant" PageGUID="EF2A1FEF-D093-405D-AE67-1D2028B003DD" />
+			<Page Name="Input Data - DC" PageGUID="2C51CF86-8FA2-4C29-BD09-20E5EB2A95EE" />
+			<Page Name="Input Data - Customer" PageGUID="068B7173-63D2-4841-BBE4-AF0534D3D938" />
+			<Page Name="Input Data - Region" PageGUID="1959DFD2-B3F3-4789-9EC3-2E1E415EB33E" />
+		</Template>
+		<Template Name="Derived Data Template" PageGUID="F3FAC6F7-AD10-42BC-A7F0-41EEE2045145">
+			<Page Name="Derived Data Page" PageGUID="67D629AD-B7C0-4010-8483-5EB531036A7B" />
+			<Page Name="Derived Data - Plant Transportation" PageGUID="05F2611A-8FF2-490E-91B2-D9643DB7DFC3" />
+			<Page Name="Derived Data - DC Transportation" PageGUID="86D7C79A-A8AF-4141-A91C-0E86B7CE1E91" />
+		</Template>
+		<Template Name="Result Template" PageGUID="B86A7656-6902-4985-B00F-C79F43F61B6B">
+			<Page Name="Result Page" PageGUID="CBE4671D-918A-43D4-8FAD-C0DA470EEC36" />
+			<Page Name="Result - Coverage" PageGUID="39FBCBBD-3AB8-4C21-93C8-FD5505970026" />
+			<Page Name="Result - Stock" PageGUID="E821D436-ED2F-4EA3-B57A-C7F58C60455C" />
+			<Page Name="Result - FlowMap" PageGUID="458A8356-DD69-4298-A669-EB1D43B186F8" />
+		</Template>
+		<Page Name="Parameter Setting Page" PageGUID="7F4604D9-61EA-413E-B27B-A84B89CFFD37" />
+	</Template>
+	<Template Name="Background Bitmap 1" PageGUID="89F00C0C-2950-4747-811C-99C0FFA9592D">
+		<Template Name="Navigation Buttons" PageGUID="381E93A2-35A9-4018-BF46-B667A1F71C2E">
+			<Page Name="Input Data Reading" PageGUID="6D258058-A9E1-4BE0-BF9A-B0C2A744AE2E" />
+			<Page Name="Map Display" PageGUID="9AFDF22E-FEC3-4254-AC01-8E006E898068" />
+			<Page Name="Result" PageGUID="B7CB176A-17FC-4679-A19F-4BCD58D8B2A1" />
+		</Template>
+		<Page Name="Main Page" PageGUID="A2059688-6347-4919-ACC3-88B5A98135B4" />
+	</Template>
+	<Page Name="All Data Pages" PageGUID="42149BE2-BACC-4FB6-BDCE-B6A65F2C4117" />
+	<Page Name="[Data Page] P_All_PlantTransportationCost" PageGUID="934530AB-CE6C-4AA4-89E2-77DF25A7E699" />
+	<Page Name="[Data Page] P_All_DCTransportationCostMultiplier" PageGUID="C12F9736-1113-45A5-A959-F38526D1726F" />
+	<Page Name="[Data Page] P_All_DCTransportationCost" PageGUID="B4296992-0A2F-44A5-8A37-0DB14D0980E4" />
+	<Page Name="[Data Page] P_All_RegionalTransportationCostMultiplier" PageGUID="111C5377-7E7A-4761-826B-B21C1C2F42CE" />
+	<Page Name="[Data Page] P_All_AverageDoesPerPO" PageGUID="2FCAD9E8-7B4C-48B7-9787-0F5FCB0DDE62" />
+	<Page Name="[Data Page] P_All_CustomerDemand" PageGUID="D755E47F-FAC4-4427-ADBF-D2B2801FA91D" />
+	<Page Name="[Data Page] P_MOTMeetCoverageServiceLevel" PageGUID="0E59E7FE-C116-434F-94D4-50A94A5F4826" />
+	<Page Name="[Data Page] V_Flow_DC_CC" PageGUID="AE1E53D0-8B83-4A30-ACC7-0A50B8933CD2" />
+	<Page Name="[Data Page] P_CustomerCityDemand" PageGUID="8FBF9393-EEB6-4512-BFB6-ACE724A67B41" />
+	<Page Name="[Data Page] V_Flow_PL_DC" PageGUID="3849B04B-5E99-461C-A676-DB60FD515707" />
+	<Page Name="[Data Page] V_IsDCServingForSKU" PageGUID="B63AD240-F654-40D7-B12E-399B9CB272C1" />
+	<Page Name="[Data Page] V_IsPieceActive" PageGUID="1C2BB7E2-9E0C-4477-9A59-B868B5B54643" />
+	<Page Name="[Data Page] V_PieceQuantity" PageGUID="930E1DAA-C149-4C1E-B575-722317943E75" />
+	<Page Name="[Data Page] V_DemandSlack" PageGUID="27F0417B-C346-4987-85AC-BD6235654E7E" />
+	<Page Name="[Data Page] P_DCTransportationCost" PageGUID="F673072D-B02B-41D6-B3C8-A58D27D0E04D" />
+	<Page Name="Flow" PageGUID="AE227726-8B85-4D9A-B5DE-40CBCEA314D7" />
+	<Page Name="Copy Flow" PageGUID="16BF7FD6-F05F-46A3-9F5A-56E1A564928A" />
+	<Page Name="[Data Page] P_PlantTransportationCost" PageGUID="B184F694-B68E-4E6E-8A95-B778DD326838" />
+	<Page Name="[Data Page] P_ProducingPlant" PageGUID="0102E209-CE6D-4FE2-8831-5D57C86EB643" />
+	<Page Name="[Data Page] P_Distance" PageGUID="96C98FC8-2BAE-4F3A-BED3-0DEFDC6902ED" />
+	<Page Name="[Data Page] P_CoveringDistance" PageGUID="D6AFB452-4B18-4353-8F79-B21ECDA2A994" />
+	<Page Name="CostResult" PageGUID="61F3B98B-162B-43A9-A4D2-C49A991CDA80" />
+	<Page Name="[Data Page] P_CoverageDCCustomerTransportationCost" PageGUID="A6336EE9-38B0-4AD8-9647-894BA62AC4B8" />
+	<Page Name="[Data Page] P_CoveragePlantDCTransportationCost" PageGUID="AB9A9559-AC3F-4571-BADC-0BE94C0FBAD8" />
+	<Page Name="[Data Page] V_DC" PageGUID="718ED701-D5C2-457B-97F2-14D2A1316FFA" />
+	<Page Name="ParameterSetting" PageGUID="AFE14195-81FA-4681-9A90-E12192121112" />
+	<Page Name="[Data Page] P_CustomerDemand" PageGUID="270A57CD-FBBA-4FA2-A692-D5565B6AE1F8" />
+	<Page Name="[Data Page] P_All_PlantTransportationCostMultiplier" PageGUID="A5AD721B-438F-4767-91A5-90C7ADA8DB60" />
+	<Page Name="[Data Page] P_PlantTransportationCostMultiplier" PageGUID="E2905AD2-6028-4A67-A1D6-719741E5BF91" />
+	<Page Name="[Data Page] P_Total_TransportationCost" PageGUID="4632BE1E-B0E4-4819-97AE-F4DA739E8F85" />
+	<Page Name="[Data Page] P_Total_Dose" PageGUID="49C7DA22-FE37-4B57-A0B5-976383ED90F1" />
+	<Page Name="[Data Page] P_UnitTransportationCost" PageGUID="CB65D2DD-66A5-46B4-B0AC-4483B54149BE" />
+	<Page Name="[Data Page] P_Coefficient" PageGUID="C33D44E9-BD6D-4A80-8222-A00F22116862" />
+</TemplateManager>

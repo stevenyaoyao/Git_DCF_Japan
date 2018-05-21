@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-07-07 14:53:02">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Network Object">
+		<Location top="6" left="6" bottom="816" right="1326" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HorizontalScrollbar>true</HorizontalScrollbar>
+		<VerticalScrollbar>true</VerticalScrollbar>
+		<ScrollControl>NavigationButtons</ScrollControl>
+		<VisibleArea>
+			<Left>87.5072009027</Left>
+			<Right>129.485420642</Right>
+			<Top>41.0805439332</Top>
+			<Bottom>18.9194560668</Bottom>
+		</VisibleArea>
+		<Background>
+			<Background_Image_Source ID="101">"From GIS Source"</Background_Image_Source>
+			<Source>
+				<Name ID="1001">"MyMap"</Name>
+				<Type ID="1002">"Bing Map"</Type>
+			</Source>
+			<Layer>
+				<Name ID="2001">"MyLayer1"</Name>
+				<Source ID="2012">"MyMap"</Source>
+			</Layer>
+		</Background>
+		<Node>
+			<Identifier>pl</Identifier>
+			<XCoordinate>P_All_Longitude( pl )</XCoordinate>
+			<YCoordinate>P_All_Latitude( pl )</YCoordinate>
+			<NumberFormat Width="6" Decimals="2" />
+			<MinimumSize>4</MinimumSize>
+			<MaximumSize>4</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Color>P_PlantColor</Color>
+			<Shape>Rectangle</Shape>
+		</Node>
+		<Node>
+			<Identifier>dc</Identifier>
+			<XCoordinate>P_All_Longitude( dc )</XCoordinate>
+			<YCoordinate>P_All_Latitude( dc )</YCoordinate>
+			<NumberFormat Width="6" Decimals="2" />
+			<MinimumSize>4</MinimumSize>
+			<MaximumSize>4</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Color>P_DCColor</Color>
+			<Shape>Rectangle</Shape>
+		</Node>
+		<Node>
+			<Identifier>cc</Identifier>
+			<XCoordinate>P_All_Longitude( cc )</XCoordinate>
+			<YCoordinate>P_All_Latitude( cc )</YCoordinate>
+			<NumberFormat Width="6" Decimals="2" />
+			<MinimumSize>2</MinimumSize>
+			<MaximumSize>2</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Color>P_CustomerCityColor</Color>
+			<Shape>Rectangle</Shape>
+		</Node>
+		<Node>
+			<Identifier>alll</Identifier>
+			<XCoordinate>P_All_Longitude( alll )</XCoordinate>
+			<YCoordinate>P_All_Latitude( alll )</YCoordinate>
+			<NumberFormat Width="6" Decimals="2" />
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Shape>Rectangle</Shape>
+		</Node>
+		<Arc>
+			<Identifier>V_Flow_PL_DC( pl, dc, sku, dt )</Identifier>
+			<NumberFormat Width="6" Decimals="2" />
+			<MaximumSize>8</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Color>P_PlantFlowColor</Color>
+			<ArrowPosition>100</ArrowPosition>
+			<GripPointPosition>100</GripPointPosition>
+			<ShapeExtraData>30</ShapeExtraData>
+			<Shape>Curved</Shape>
+			<FirstSegment>Horizontal</FirstSegment>
+			<ClickWhere>ArrowHead</ClickWhere>
+		</Arc>
+		<Arc>
+			<Identifier>V_Flow_DC_CC( dc, cc, sku, mot, dt )</Identifier>
+			<NumberFormat Width="6" Decimals="2" />
+			<MaximumSize>8</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>Nothing</TextShowWhat>
+			<Color>P_DCFlowColor</Color>
+			<ArrowPosition>100</ArrowPosition>
+			<ShapeExtraData>30</ShapeExtraData>
+			<Shape>Curved</Shape>
+			<FirstSegment>Horizontal</FirstSegment>
+			<ClickWhere>ArrowHead</ClickWhere>
+		</Arc>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>V_Flow_DC_CC</Symbol>
+			<Symbol>V_Flow_PL_DC</Symbol>
+			<Symbol>P_All_Latitude</Symbol>
+			<Symbol>P_All_Longitude</Symbol>
+			<Symbol>pl</Symbol>
+			<Symbol>dc</Symbol>
+			<Symbol>cc</Symbol>
+			<Symbol>dt</Symbol>
+			<Symbol>sku</Symbol>
+			<Symbol>mot</Symbol>
+			<Symbol>alll</Symbol>
+			<Symbol>P_PlantFlowColor</Symbol>
+			<Symbol>P_DCFlowColor</Symbol>
+			<Symbol>P_PlantColor</Symbol>
+			<Symbol>P_DCColor</Symbol>
+			<Symbol>P_CustomerCityColor</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

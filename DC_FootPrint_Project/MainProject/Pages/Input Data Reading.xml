@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-06-25 13:54:40">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Button">
+		<Location top="84" left="90" bottom="156" right="264" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Read Excel Input"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Read_Excel_Input</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>Read_Excel_Input</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,14 @@
+Warning at line 247 in user-defined function section "Read_Excel_Input".
+The tuple (石河子市,PTX,Normal) is assigned to P_All_CustomerDemand with the values 1259.95215212 and 0.
+Warning at line 247 in user-defined function section "Read_Excel_Input".
+The tuple (济源市,HIB,Normal) is assigned to P_All_CustomerDemand with the values 1934.01217536 and 304.852766625.
+Warning at line 247 in user-defined function section "Read_Excel_Input".
+The tuple (仙桃市,HIB,Normal) is assigned to P_All_CustomerDemand with the values 28617.9168841 and 0.
+Input/output error at line 7 in user-defined function section "pro::LibraryTermination", column 3.
+The user function library \x64\AimmsPROClient.dll cannot be found.
+Input/output error at line 7 in user-defined function section "pro::LibraryTermination", column 3.
+The library \x64\AimmsPROClient.dll has not been loaded because: Error loading library : The parameter is incorrect.
+Execution error at line 7 in user-defined function section "pro::LibraryTermination".
+The dll for external procedure "pro::management::IsInitialized" has not been found.
+Execution error at line 7 in user-defined function section "pro::LibraryTermination".
+The special value "undf" cannot be used in the condition IsInitialized() of a flow control statement.

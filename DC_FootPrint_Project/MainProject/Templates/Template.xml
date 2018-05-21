@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-07-24 14:39:42">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Picture">
+		<Location top="84" left="6" bottom="798" right="1536" />
+		<FileName LiteralFileName="true">"Pic\016-Sanofi.jpg"</FileName>
+		<Display>ActualSize</Display>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="12" left="6" bottom="72" right="216" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Input Data"</Title>
+		<ForegroundColor>
+			<Symbol>P_Color_InputData</Symbol>
+		</ForegroundColor>
+		<Font GUID="5EA746F4-FA39-4CCC-A6A1-7D59E9B9FDCC" Name="Menu" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page PageGUID="D272A8E6-3971-4DCC-9101-0A326C069821" Name="Input Data Page" />
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Click_InputData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="12" left="794" bottom="72" right="1004" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Derived Data"</Title>
+		<ForegroundColor>
+			<Symbol>P_Color_DerivedData</Symbol>
+		</ForegroundColor>
+		<Font GUID="5EA746F4-FA39-4CCC-A6A1-7D59E9B9FDCC" Name="Menu" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page PageGUID="05F2611A-8FF2-490E-91B2-D9643DB7DFC3" Name="Derived Data - Plant Transportation" />
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Click_DerivedData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="12" left="1188" bottom="72" right="1398" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Result"</Title>
+		<ForegroundColor>
+			<Symbol>P_Color_Result</Symbol>
+		</ForegroundColor>
+		<Font GUID="5EA746F4-FA39-4CCC-A6A1-7D59E9B9FDCC" Name="Menu" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page PageGUID="458A8356-DD69-4298-A669-EB1D43B186F8" Name="Result - FlowMap" />
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Click_Result</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="12" left="400" bottom="72" right="610" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Parameter Setting"</Title>
+		<ForegroundColor>
+			<Symbol>P_Color_ParameterSetting</Symbol>
+		</ForegroundColor>
+		<Font GUID="5EA746F4-FA39-4CCC-A6A1-7D59E9B9FDCC" Name="Menu" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page PageGUID="7F4604D9-61EA-413E-B27B-A84B89CFFD37" Name="Parameter Setting Page" />
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Click_ParameterSetting</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Picture">
+		<Location top="6" left="1440" bottom="78" right="1536" />
+		<FileName LiteralFileName="true">"Pic\SANOFI_Logo_vertical-4colors.jpg"</FileName>
+		<Display>StretchOrShrink</Display>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>Click_InputData</Symbol>
+			<Symbol>Click_ParameterSetting</Symbol>
+			<Symbol>Click_DerivedData</Symbol>
+			<Symbol>Click_Result</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

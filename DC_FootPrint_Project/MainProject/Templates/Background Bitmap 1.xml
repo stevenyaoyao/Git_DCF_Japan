@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-06-25 13:54:40" NeedsCompiledModel="false">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Picture">
+		<Location top="6" left="6" bottom="852" right="1440" />
+		<FileName LiteralFileName="true">"Pic\Background.jpg"</FileName>
+		<Display>Multiple</Display>
+	</PageObject>
+	<UsedReferences>
+		<Model />
+	</UsedReferences>
+</Page>

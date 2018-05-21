@@ -1,0 +1,2427 @@
+## ams_version=1.0
+
+Model Main_DC_FootPrint_Project {
+    Section Model_Declaration {
+        Section Input_Declaration {
+            DeclarationSection Set_Declaration {
+                Set S_Model_Plant {
+                    SubsetOf: S_All_Plant;
+                    Index: pl;
+                }
+                Set S_Model_DC {
+                    SubsetOf: S_All_DC;
+                    Index: dc;
+                }
+                Set S_Model_Region {
+                    SubsetOf: S_All_Region;
+                    Index: r;
+                }
+                Set S_Model_CustomerCity {
+                    SubsetOf: S_All_CustomerCity;
+                    Index: cc;
+                }
+                Set S_Model_Location {
+                    SubsetOf: S_All_Location;
+                    Index: l;
+                }
+                Set S_Model_Customer {
+                    SubsetOf: S_All_Customer;
+                    Index: cs;
+                }
+                Set S_Model_DemandType {
+                    SubsetOf: S_All_DemandType;
+                    Index: dt;
+                }
+                Set S_Model_SKU {
+                    SubsetOf: S_All_SKU;
+                    Index: sku;
+                }
+                Set S_Model_SKUGroup {
+                    SubsetOf: S_All_SKUGroup;
+                    Index: skug;
+                }
+                Set S_Model_SKUCategory {
+                    SubsetOf: S_All_SKUCategory;
+                    Index: skuc;
+                }
+                Set S_Model_ServiceLevel {
+                    SubsetOf: S_All_ServiceLevel;
+                    Index: sl;
+                }
+                Set S_Model_MOT {
+                    SubsetOf: S_All_MOT;
+                    Index: mot;
+                }
+                Set S_Model_Sequence {
+                    Index: seq;
+                    Definition: data{1..100};
+                }
+            }
+            DeclarationSection Input_Parameters {
+                ElementParameter P_DCDemandType {
+                    IndexDomain: dc;
+                    Range: S_Model_DemandType;
+                }
+                Parameter P_DCFixedCost {
+                    IndexDomain: dc;
+                }
+                Parameter P_DCFixedCostYears;
+                Parameter P_AnnualOperationalCost {
+                    IndexDomain: dc;
+                }
+                Parameter P_Latitude {
+                    IndexDomain: l;
+                }
+                Parameter P_Longitude {
+                    IndexDomain: l;
+                }
+                Parameter P_ServiceLevelHrs {
+                    IndexDomain: sl;
+                }
+                ElementParameter P_SKUServiceLevel {
+                    IndexDomain: sku;
+                    Range: S_Model_ServiceLevel;
+                }
+                ElementParameter P_SKUCoverageLevel {
+                    IndexDomain: skuc;
+                    Range: S_Model_ServiceLevel;
+                }
+                Parameter P_ServiceLevelMeetingTarget {
+                    IndexDomain: allskug;
+                }
+                ElementParameter P_SKUCategory {
+                    IndexDomain: sku;
+                    Range: S_Model_SKUCategory;
+                }
+                ElementParameter P_SKUGroup {
+                    IndexDomain: sku;
+                    Range: S_Model_SKUGroup;
+                }
+                ElementParameter P_ProducingPlant {
+                    IndexDomain: sku;
+                    Range: S_Model_Plant;
+                }
+                Parameter P_SKUMaximumNumOfHandlingDC {
+                    IndexDomain: sku;
+                }
+                Parameter P_SKULCLWeight {
+                    IndexDomain: sku;
+                }
+                Parameter P_CycleStockRate {
+                    IndexDomain: sku;
+                }
+                Parameter P_SKUTransportCostMultiplier {
+                    IndexDomain: sku;
+                }
+                Parameter P_TravelSpeed {
+                    IndexDomain: mot;
+                }
+                ElementParameter P_CustomerCity {
+                    IndexDomain: cs;
+                    Range: S_Model_CustomerCity;
+                }
+                Parameter P_PlantTransportationCost {
+                    IndexDomain: (pl, dc, sku);
+                }
+                Parameter P_PlantTransportationCostMultiplier {
+                    IndexDomain: (pl, dc, sku);
+                }
+                ElementParameter P_CustomerCityRegion {
+                    IndexDomain: cc;
+                    Range: S_Model_Region;
+                }
+                Parameter P_LCLCost {
+                    IndexDomain: (dc, cc, sku, mot);
+                }
+                Parameter P_DCTransportationCostMultiplier {
+                    IndexDomain: (dc, cc, sku, mot);
+                }
+                Parameter P_RegionalTransportationCostMultiplier {
+                    IndexDomain: (r,skug);
+                }
+                Parameter P_SingleDCSafetyStockLevel {
+                    IndexDomain: sku;
+                }
+                Parameter P_AnnualExpiryRate {
+                    IndexDomain: sku;
+                }
+                Parameter P_UnitValue {
+                    IndexDomain: sku;
+                }
+                Parameter P_SafetyStock {
+                    IndexDomain: seq;
+                }
+                Parameter P_DCHandingCost {
+                    IndexDomain: (dc, sku);
+                }
+                Parameter P_DCHandlingSKUC {
+                    IndexDomain: (dc, skuc);
+                    Range: binary;
+                }
+                Parameter P_CustomerDemand {
+                    IndexDomain: (cs, sku, dt);
+                }
+                Parameter P_PieceWiseMaxQ {
+                    IndexDomain: (sku, seq);
+                }
+                Parameter P_PieceWiseCost {
+                    IndexDomain: (sku, seq);
+                }
+                Parameter P_MinimumNumberOfDCs;
+                Parameter P_MaximumNumberOfDCs;
+                Parameter P_IsDCFixed {
+                    IndexDomain: (dc, dt);
+                    Range: binary;
+                }
+                Parameter P_MinimumDC {
+                    IndexDomain: dt;
+                }
+                Parameter P_MaximumDC {
+                    IndexDomain: dt;
+                }
+                Parameter P_UnderCoverageWeight;
+                Parameter P_ServiceLevelWeight;
+                Parameter P_BigM {
+                    InitialData: 10000000000;
+                }
+                Parameter P_FixedNumberOfDC {
+                    IndexDomain: dt;
+                }
+            }
+            DeclarationSection Derived_Parameters {
+                Parameter P_CustomerCityDemand {
+                    IndexDomain: (cc, sku, dt);
+                }
+                Parameter P_ServiceLevelDays {
+                    IndexDomain: sl;
+                }
+                Parameter P_DCTransportationCost {
+                    IndexDomain: (dc, cc, sku, mot);
+                }
+                Parameter P_SequenceNumber {
+                    IndexDomain: seq;
+                }
+                ElementParameter P_MOTMeetCoverageServiceLevel {
+                    IndexDomain: (dc, cc, sku);
+                    Range: S_Model_MOT;
+                }
+                Parameter P_TotalDemand {
+                    IndexDomain: skug;
+                }
+                Parameter P_TotalDemandPerSKU {
+                    IndexDomain: sku;
+                }
+                Parameter P_IsPiecewiseCostFunctionNeededForSKU {
+                    IndexDomain: sku;
+                    Range: binary;
+                }
+                Parameter P_Distance {
+                    IndexDomain: (dc,cc);
+                }
+                Parameter P_TotalDemandAll;
+            }
+        }
+        DeclarationSection Decision_Variables_Declaration {
+            Variable V_DC {
+                IndexDomain: (dc,dt) | P_DCDemandType(dc) = dt;
+                Range: binary;
+            }
+            Variable V_Flow_DC_CC {
+                IndexDomain: (dc,cc,sku,mot,dt) | P_DCDemandType(dc) = dt and P_DCHandlingSKUC(dc, P_SKUCategory(sku)) and P_CustomerCityDemand(cc, sku, dt) > 0;
+                Range: nonnegative;
+            }
+            Variable V_NumDC {
+                IndexDomain: dt;
+                Range: integer;
+            }
+            Variable V_BinaryNumDC {
+                IndexDomain: (dt, seq) | P_SequenceNumber(seq) > 0;
+                Range: binary;
+            }
+            Variable V_Flow_PL_DC {
+                IndexDomain: (pl,dc,sku,dt) | P_ProducingPlant(sku) = pl and P_DCHandlingSKUC(dc, P_SKUCategory(sku)) and P_DCDemandType(dc) = dt;
+                Range: nonnegative;
+            }
+            Variable V_IsDCServingForSKU {
+                IndexDomain: (dc, sku) | P_SKUMaximumNumOfHandlingDC(sku) > 0;
+                Range: binary;
+            }
+            Variable V_IsPieceActive {
+                IndexDomain: (sku, seq, pl, dc) | P_PieceWiseMaxQ(sku, seq) > 0 and P_ProducingPlant(sku) = pl and P_DCHandlingSKUC(dc, P_SKUCategory(sku));
+                Range: binary;
+            }
+            Variable V_PieceQuantity {
+                IndexDomain: (sku, seq, pl, dc) | P_PieceWiseMaxQ(sku, seq) > 0 and P_ProducingPlant(sku) = pl and P_DCHandlingSKUC(dc, P_SKUCategory(sku));
+                Range: nonnegative;
+            }
+            Variable V_DemandSlack {
+                IndexDomain: (cc, sku, dt) | P_CustomerCityDemand(cc, sku, dt) > 0;
+                Range: nonnegative;
+            }
+            Variable V_ServiceLevelSlackVar {
+                IndexDomain: skug;
+                Range: nonnegative;
+            }
+        }
+        DeclarationSection Constraints_Declaration {
+            Constraint C_BuildDcConstraint {
+                IndexDomain: (dc, dt);
+                Definition: sum((cc, sku, mot), V_Flow_DC_CC(dc, cc, sku, mot, dt)) <= P_BigM * V_DC(dc, dt);
+            }
+            Constraint C_NumberOfDcConstraint {
+                IndexDomain: dt;
+                Definition: sum(dc, V_DC(dc, dt)) = V_NumDC(dt);
+            }
+            Constraint C_BinaryNumDcConstraint1 {
+                IndexDomain: dt;
+                Definition: sum(seq, V_BinaryNumDC(dt, seq) * P_SequenceNumber(seq)) = V_NumDC(dt);
+            }
+            Constraint C_BinaryNumDcConstraint2 {
+                IndexDomain: dt;
+                Definition: sum(seq, V_BinaryNumDC(dt, seq)) <= 1;
+            }
+            Constraint C_DcServingSKU {
+                IndexDomain: (dc,sku) | P_SKUMaximumNumOfHandlingDC(sku) > 0;
+                Definition: sum((cc, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt)) <= P_BigM * V_IsDCServingForSKU(dc, sku);
+            }
+            Constraint C_FixedDcConstraint {
+                IndexDomain: (dc, dt) | P_IsDCFixed(dc, dt) = 1;
+                Definition: V_DC(dc, dt) = 1;
+            }
+            Constraint C_MaxDcConstraint {
+                IndexDomain: dt;
+                Definition: V_NumDC(dt) <= P_MaximumDC(dt);
+            }
+            Constraint C_MinDcConstraint {
+                IndexDomain: dt;
+                Definition: V_NumDC(dt) >= P_MinimumDC(dt);
+            }
+            Constraint C_MaximumSKUDcConstraint {
+                IndexDomain: sku | P_SKUMaximumNumOfHandlingDC(sku) > 0;
+                Definition: sum(dc, V_IsDCServingForSKU(dc, sku)) <= P_SKUMaximumNumOfHandlingDC(sku);
+            }
+            Constraint C_SupplyDemandConstraint {
+                IndexDomain: (dc,sku,dt);
+                Definition: sum(pl, V_Flow_PL_DC(pl, dc, sku, dt)) = sum((cc, mot), V_Flow_DC_CC(dc, cc, sku, mot, dt));
+            }
+            Constraint C_DemandFulfillmentConstraint {
+                IndexDomain: (cc,sku,dt);
+                Definition: {
+                    !sum((dc, mot), V_Flow_DC_CC(dc, cc, sku, mot, dt)) = P_CustomerCityDemand(cc, sku, dt)
+                    
+                    sum((dc, mot), V_Flow_DC_CC(dc, cc, sku, mot, dt)) + V_DemandSlack(cc, sku, dt) = P_CustomerCityDemand(cc, sku, dt)
+                }
+            }
+            Constraint C_ServiceLevelConstraint {
+                IndexDomain: (skug);
+                Definition: {
+                    sum((dc, cc, sku, mot, dt) | mot = P_MOTMeetCoverageServiceLevel(dc, cc, sku) and P_SKUGroup(sku) = skug, V_Flow_DC_CC(dc, cc, sku, mot, dt))
+                     + V_ServiceLevelSlackVar(skug) >= P_TotalDemand(skug) * P_ServiceLevelMeetingTarget(skug)
+                    
+                    !sum((dc, cc, sku, mot, dt) | mot = P_MOTMeetCoverageServiceLevel(dc, cc, sku), V_Flow_DC_CC(dc, cc, sku, mot, dt))
+                    ! + V_ServiceLevelSlackVar >= P_TotalDemand * P_ServiceLevelMeetingTarget
+                }
+            }
+            Constraint C_PiecewiseLinearCostConstraint1 {
+                IndexDomain: (pl, dc, sku, seq) | P_IsPiecewiseCostFunctionNeededForSKU(sku) = 1;
+                Definition: P_PieceWiseMaxQ(sku, seq) * V_IsPieceActive(sku, seq, pl, dc) >= V_PieceQuantity(sku, seq, pl, dc);
+            }
+            Constraint C_PiecewiseLinearCostConstraint2 {
+                IndexDomain: (pl,dc,sku,seq) | P_IsPiecewiseCostFunctionNeededForSKU(sku) = 1;
+                Definition: P_PieceWiseMaxQ(sku, seq - 1) * V_IsPieceActive(sku, seq, pl, dc) <= V_PieceQuantity(sku, seq - 1, pl, dc);
+            }
+            Constraint C_PiecewiseLinearFlowConstraint {
+                IndexDomain: (pl,dc,sku) | P_IsPiecewiseCostFunctionNeededForSKU(sku) = 1;
+                Definition: sum(seq | P_PieceWiseMaxQ(sku, seq) > 0, V_PieceQuantity(sku, seq, pl, dc)) = sum(dt, V_Flow_PL_DC(pl, dc, sku, dt));
+            }
+            Constraint C_SameLocationNoAir {
+                IndexDomain: (dc, cc, sku, mot, dt) | P_DCDemandType(dc) = dt and P_DCHandlingSKUC(dc, P_SKUCategory(sku)) and P_CustomerCityDemand(cc, sku, dt) > 0 and P_All_LocationDistance(dc, cc) < 1000 and mot = "Air";
+                Definition: {
+                    V_Flow_DC_CC(dc, cc, sku, mot, dt) = 0
+                    
+                    !and P_Latitude(dc) = P_Latitude(cc) and P_Longitude(dc) = P_Longitude(cc)
+                }
+                Comment: "and P_Latitude(dc) = P_Latitude(cc) and P_Longitude(dc) = P_Longitude(cc)";
+            }
+            Constraint C_FixedNumberOfDC {
+                IndexDomain: dt | P_FixedNumberOfDC(dt) > 0;
+                Definition: V_NumDC(dt) = P_FixedNumberOfDC(dt);
+            }
+            Constraint C_NotAllowAirRegionOrDC {
+                IndexDomain: (dc,cc,sku,mot,dt) | P_All_CanUseAirFlag = 1 and mot = 'Air' and (P_UI_IsRegionAllowAir(P_CustomerCityRegion(cc)) = 0 or P_UI_IsDCAllowAir(dc) = 0);
+                Definition: V_Flow_DC_CC(dc,cc,sku,mot,dt) = 0;
+            }
+            Constraint C_DCNotAbleToHandleSKUC {
+                IndexDomain: (dc,sku) | P_DCHandlingSKUC(dc, P_SKUCategory(sku)) = 0;
+                Definition: {
+                    V_IsDCServingForSKU(dc, sku) = 0;
+                }
+            }
+        }
+        DeclarationSection Objective_Function {
+            Variable V_DCFixedCost {
+                Range: nonnegative;
+                Definition: {
+                    sum((dc, dt), V_DC(dc, dt) * P_DCFixedCost(dc))
+                    !sum((dc, dt), V_DC(dc, dt) * P_DCFixedCost(dc) / P_DCFixedCostYears)
+                }
+            }
+            Variable V_DCHandlingCost {
+                Range: nonnegative;
+                Definition: sum((dc, cc, sku, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt) * P_DCHandingCost(dc, sku));
+            }
+            Variable V_DCOperationalCost {
+                Range: nonnegative;
+                Definition: {
+                    sum((dc, dt), V_DC(dc, dt) * P_AnnualOperationalCost(dc)) * 3
+                    !sum((dc, dt), V_DC(dc, dt) * P_AnnualOperationalCost(dc))
+                }
+            }
+            Variable V_DCTransportationCost {
+                Range: nonnegative;
+                Definition: {
+                    sum((dc, cc, sku, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt)
+                    				* P_DCTransportationCost(dc, cc, sku, mot)
+                    				!* P_RegionalTransportationCostMultiplier(P_CustomerCityRegion(cc), P_SKUGroup(sku)))
+                    				! As it has been considered during vaccine P_DCTransportationCost calculation
+                    				* P_DCTransportationCostMultiplier(dc, cc, sku, mot))
+                }
+            }
+            Variable V_PlantTransportationCost {
+                Range: nonnegative;
+                Definition: {
+                    sum((pl, dc, sku, dt) | P_IsPiecewiseCostFunctionNeededForSKU(sku) = 0, P_PlantTransportationCost(pl, dc, sku) * P_PlantTransportationCostMultiplier(pl, dc, sku) * V_Flow_PL_DC(pl, dc, sku, dt))
+                    + sum((pl, dc, sku, seq) | P_IsPiecewiseCostFunctionNeededForSKU(sku) = 1, P_PieceWiseCost(sku, seq) * P_PlantTransportationCostMultiplier(pl, dc, sku) * V_PieceQuantity(sku, seq, pl, dc))
+                }
+            }
+            Variable V_SafetyStockCost {
+                Range: nonnegative;
+                Definition: {
+                    sum((seq, sku, dt), V_BinaryNumDC(dt, seq) * P_SafetyStock(seq) * P_SingleDCSafetyStockLevel(sku) 
+                    					   ! * P_TotalDemandPerSKU(sku)
+                    					   ! No need as P_SingleDCSafetyStockLevel is unit already?
+                    					   * P_AnnualExpiryRate(sku) * P_UnitValue(sku))
+                }
+                Comment: {
+                    "!sum(dc, V_IsDCServingForSKU(dc, sku)) <= P_SKUMaximumNumOfHandlingDC(sku)"
+                }
+            }
+            Variable V_UnderCoveragePenalty {
+                Range: nonnegative;
+                Definition: sum((cc, sku, dt), P_UnderCoverageWeight * V_DemandSlack(cc, sku, dt));
+            }
+            Variable V_ServiceLevelSlackPenalty {
+                Range: nonnegative;
+                Definition: sum(skug, P_ServiceLevelWeight * V_ServiceLevelSlackVar(skug));
+            }
+            Parameter P_CycleStockCost {
+                Range: free;
+                Definition: sum(sku, P_CycleStockRate(sku) * P_TotalDemandPerSKU(sku) * P_AnnualExpiryRate(sku) * P_UnitValue(sku));
+            }
+            Variable V_Objective {
+                Range: free;
+                Definition: {
+                    P_Weight_DCFixedCost * V_DCFixedCost + P_Weight_DCHandlingCost * V_DCHandlingCost + P_Weight_DCOperationalCost * V_DCOperationalCost 
+                    + P_Weight_DCTransportationCost * V_DCTransportationCost + P_Weight_PlantTransportationCost * V_PlantTransportationCost 
+                    + P_Weight_DCSafetyStockCost * V_SafetyStockCost
+                    + V_UnderCoveragePenalty + V_ServiceLevelSlackPenalty
+                    ! + P_CycleStockCost
+                }
+            }
+        }
+        DeclarationSection Math_Model {
+            Set S_BaseModelVariables {
+                SubsetOf: AllVariables;
+                Definition: {
+                    data {
+                    'V_DC'
+                    , 'V_Flow_DC_CC'
+                    , 'V_NumDC'
+                    , 'V_BinaryNumDC'
+                    , 'V_Flow_PL_DC'
+                    , 'V_IsDCServingForSKU'
+                    , 'V_IsPieceActive'
+                    , 'V_PieceQuantity'
+                    , 'V_DemandSlack'
+                    , 'V_ServiceLevelSlackVar'
+                    , 'V_DCFixedCost'
+                    , 'V_DCHandlingCost'
+                    , 'V_DCOperationalCost'
+                    , 'V_DCTransportationCost'
+                    , 'V_PlantTransportationCost'
+                    , 'V_SafetyStockCost'
+                    , 'V_UnderCoveragePenalty'
+                    , 'V_ServiceLevelSlackPenalty'
+                    , 'V_Objective'
+                    , 'V_A'
+                    }
+                }
+            }
+            MathematicalProgram DCFootPrint_BaseModel {
+                Objective: V_Objective;
+                Direction: minimize;
+                Constraints: AllConstraints;
+                Variables: S_BaseModelVariables;
+                Type: MIP;
+            }
+        }
+    }
+    Section Sanofi_Data {
+        Section Raw_Data {
+            DeclarationSection Raw_Set {
+                Set S_All_Plant {
+                    SubsetOf: S_All_Location;
+                    Index: allpl;
+                }
+                Set S_All_DC {
+                    SubsetOf: S_All_Location;
+                    Index: alldc;
+                }
+                Set S_All_Region {
+                    Index: allr;
+                }
+                Set S_All_CustomerCity {
+                    SubsetOf: S_All_Location;
+                    Index: allcc;
+                }
+                Set S_All_Location {
+                    Index: alll, alll2;
+                }
+                Set S_All_Customer {
+                    SubsetOf: S_All_Location;
+                    Index: allcs;
+                }
+                Set S_All_DemandType {
+                    Index: alldt;
+                }
+                Set S_All_SKU {
+                    Index: allsku;
+                }
+                Set S_All_SKUGroup {
+                    Index: allskug;
+                }
+                Set S_All_SKUCategory {
+                    Index: allskuc;
+                }
+                Set S_All_ServiceLevel {
+                    Index: allsl;
+                }
+                Set S_All_MOT {
+                    Index: allmot;
+                }
+            }
+            DeclarationSection Raw_Input_Parameters {
+                ElementParameter P_All_DCDemandType {
+                    IndexDomain: alldc;
+                    Range: S_All_DemandType;
+                }
+                Parameter P_All_DCFixedCost {
+                    IndexDomain: alldc;
+                }
+                Parameter P_All_AnnualOperationalCost {
+                    IndexDomain: alldc;
+                }
+                Parameter P_All_Latitude {
+                    IndexDomain: alll;
+                }
+                Parameter P_All_Longitude {
+                    IndexDomain: Alll;
+                }
+                Parameter P_All_ServiceLevelHrs {
+                    IndexDomain: allsl;
+                }
+                ElementParameter P_All_SKUServiceLevel {
+                    IndexDomain: allsku;
+                    Range: S_All_ServiceLevel;
+                }
+                ElementParameter P_All_SKUCoverageLevel {
+                    IndexDomain: allskuc;
+                    Range: S_All_ServiceLevel;
+                }
+                ElementParameter P_All_SKUCategory {
+                    IndexDomain: allsku;
+                    Range: S_All_SKUCategory;
+                }
+                ElementParameter P_All_SKUGroup {
+                    IndexDomain: allsku;
+                    Range: S_All_SKUGroup;
+                }
+                ElementParameter P_All_ProducingPlant {
+                    IndexDomain: allsku;
+                    Range: S_All_Plant;
+                }
+                Parameter P_All_SKUMaximumNumOfHandlingDC {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_SKULCLWeight {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_CycleStockRate {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_SKUTransportCostMultiplier {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_TravelSpeed {
+                    IndexDomain: allmot;
+                }
+                ElementParameter P_All_CustomerCity {
+                    IndexDomain: allcs;
+                    Range: S_All_CustomerCity;
+                }
+                Parameter P_All_PlantTransportationCost {
+                    IndexDomain: (allpl, alldc, allsku);
+                }
+                Parameter P_All_PlantTransportationCostMultiplier {
+                    IndexDomain: (allpl, alldc, allsku);
+                }
+                ElementParameter P_All_CustomerCityRegion {
+                    IndexDomain: allcc;
+                    Range: S_All_Region;
+                }
+                Parameter P_All_LCLCost {
+                    IndexDomain: (alldc, allcc, allsku, allmot);
+                }
+                Parameter P_All_DCTransportationCostMultiplier {
+                    IndexDomain: (alldc, allcc, allsku, allmot);
+                }
+                Parameter P_All_RegionalTransportationCostMultiplier {
+                    IndexDomain: (allr,allskug);
+                }
+                Parameter P_All_SingleDCSafetyStockLevel {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_AnnualExpiryRate {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_UnitValue {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_DCHandingCost {
+                    IndexDomain: (alldc, allsku);
+                }
+                Parameter P_All_DCHandlingSKUC {
+                    IndexDomain: (alldc, allskuc);
+                    Range: binary;
+                }
+                Parameter P_All_CustomerDemand {
+                    IndexDomain: (allcs, allsku, alldt);
+                }
+                Parameter P_All_PieceWiseMaxQ {
+                    IndexDomain: (allsku, seq);
+                }
+                Parameter P_All_PieceWiseCost {
+                    IndexDomain: (allsku, seq);
+                }
+                Parameter P_All_IsDCFixed {
+                    IndexDomain: (alldc, alldt);
+                    Range: binary;
+                }
+                Parameter P_All_MinimumDC {
+                    IndexDomain: alldt;
+                }
+                Parameter P_All_MaximumDC {
+                    IndexDomain: alldt;
+                }
+            }
+            DeclarationSection Raw_Input_Only {
+                StringParameter P_All_PlantDescription {
+                    IndexDomain: allpl;
+                }
+                StringParameter P_All_DCDescription {
+                    IndexDomain: alldc;
+                }
+                StringParameter P_All_SKUGroupDescription {
+                    IndexDomain: allskug;
+                }
+                StringParameter P_All_SKUCategoryDescription {
+                    IndexDomain: allskuc;
+                }
+                StringParameter P_All_SKUGMID {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_SKULCLWeightPerUnit_Truck {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_SKULCLWeightPerUnit_Air {
+                    IndexDomain: allsku;
+                }
+                StringParameter P_All_SKUDescription {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_SKUUnitTransportCostPD {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_LocationDistance {
+                    IndexDomain: (alll,alll2);
+                }
+                Parameter P_All_AverageDoesPerPO {
+                    IndexDomain: (allr,allskug);
+                }
+                Parameter P_All_DCHandingCostSameForAllDC {
+                    IndexDomain: allsku;
+                }
+                Set S_All_HistoryOrders {
+                    Index: allho;
+                }
+                ElementParameter P_All_HistoryOrderCustomer {
+                    IndexDomain: allho;
+                    Range: S_All_Customer;
+                }
+                ElementParameter P_All_HistoryOrderSKU {
+                    IndexDomain: allho;
+                    Range: S_All_SKU;
+                }
+                Parameter P_All_HistoryOrderSize {
+                    IndexDomain: allho;
+                }
+                StringParameter P_All_HistoryOrderDate {
+                    IndexDomain: allho;
+                }
+                Parameter P_All_AllowNewDC {
+                    Range: binary;
+                }
+                Parameter P_All_IsSKUGropuCategorySelectedForSimulation {
+                    IndexDomain: allskug;
+                    Range: binary;
+                }
+                Parameter P_All_AllowTransferBetweenDC {
+                    Range: binary;
+                }
+                Parameter P_All_BaseMinimumOrderSize {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_MinimumOrderSize {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_VaccineDCTransportCostPerTruckPerKM;
+                Parameter P_All_NumberOfVaccineCDCPerDay;
+                Parameter P_All_ExtraCostPerStop;
+            }
+            DeclarationSection Raw_Derived_Parameters {
+                Parameter P_All_CustomerCityDemand {
+                    IndexDomain: (allcc, allsku, alldt);
+                }
+                Parameter P_All_ServiceLevelDays {
+                    IndexDomain: allsl;
+                }
+                Parameter P_All_DCTransportationCost {
+                    IndexDomain: (alldc, allcc, allsku, allmot);
+                }
+                ElementParameter P_All_MOTMeetCoverageServiceLevel {
+                    IndexDomain: (alldc, allcc, allsku);
+                    Range: S_All_MOT;
+                }
+                Parameter P_All_TotalDemand;
+                Parameter P_All_TotalDemandPerSKU {
+                    IndexDomain: allsku;
+                }
+                Parameter P_All_IsPiecewiseCostFunctionNeededForSKU {
+                    IndexDomain: allsku;
+                    Range: binary;
+                }
+                Parameter P_All_Distance {
+                    IndexDomain: (alldc, allcc);
+                }
+            }
+        }
+    }
+    Section Model_Domain {
+        DeclarationSection Model_Domain_Declaration {
+            Set S_Existing_Plant {
+                SubsetOf: (S_All_Plant, S_Existing_Location);
+                Index: epl;
+            }
+            Set S_Existing_DC {
+                SubsetOf: S_All_Location;
+                Index: edc;
+            }
+            Set S_Existing_Region {
+                SubsetOf: S_All_Region;
+                Index: er;
+            }
+            Set S_Existing_CustomerCity {
+                SubsetOf: (S_All_CustomerCity, S_Existing_Location);
+                Index: ecc;
+            }
+            Set S_Existing_Location {
+                SubsetOf: S_All_Location;
+                Index: el;
+            }
+            Set S_Existing_Customer {
+                SubsetOf: S_All_Customer;
+                Index: ecs;
+            }
+            Set S_Existing_DemandType {
+                SubsetOf: S_All_DemandType;
+                Index: edt;
+            }
+            Set S_Existing_SKU {
+                SubsetOf: S_All_SKU;
+                Index: esku;
+            }
+            Set S_Existing_SKUGroup {
+                SubsetOf: S_All_SKUGroup;
+                Index: eskug;
+            }
+            Set S_Existing_SKUCategory {
+                SubsetOf: S_All_SKUCategory;
+                Index: eskuc;
+            }
+            Set S_Existing_ServiceLevel {
+                SubsetOf: S_All_ServiceLevel;
+                Index: esl;
+            }
+            Set S_Existing_MOT {
+                SubsetOf: S_All_MOT;
+                Index: emot;
+            }
+        }
+    }
+    Section Regression_Model {
+        DeclarationSection Parameter_Declaration {
+            Set S_Reg_Date {
+                Index: rdate;
+            }
+            Set S_Reg_DC {
+                SubsetOf: S_All_DC;
+                Index: rdc;
+            }
+            Set S_Reg_CustomerCity {
+                SubsetOf: S_All_CustomerCity;
+                Index: rcc;
+            }
+            Parameter P_Reg_Dose {
+                IndexDomain: (rdate,rdc,rcc);
+            }
+            Parameter P_Reg_TransportationCost {
+                IndexDomain: (rdate,rdc,rcc);
+            }
+            Set S_Reg_Integer {
+                Index: ri;
+                Definition: data{1..10000};
+            }
+            ElementParameter P_Reg_RunningNumber {
+                Range: S_Reg_Integer;
+            }
+            Parameter P_Reg_Distance {
+                IndexDomain: (ri);
+            }
+            Parameter P_Reg_UnitTransportationCost {
+                IndexDomain: ri;
+            }
+            Parameter P_Total_TransportationCost {
+                IndexDomain: (rdc,rcc);
+            }
+            Parameter P_Total_Dose {
+                IndexDomain: (rdc,rcc);
+            }
+            Parameter P_UnitTransportationCost {
+                IndexDomain: (rdc,rcc);
+            }
+            Parameter P_Coefficient {
+                IndexDomain: (rdc,rcc);
+            }
+            Parameter P_NearestDistance;
+            ElementParameter P_NearestDC {
+                Range: S_Reg_DC;
+            }
+            ElementParameter P_NearestCC {
+                Range: S_Reg_CustomerCity;
+            }
+            Parameter P_UsedCoefficient;
+            Parameter P_RegResult_UnitTransportationCost {
+                IndexDomain: (alldc,allcc);
+            }
+            Parameter P_Result_A {
+                IndexDomain: (alldc,allcc);
+            }
+            Parameter P_Result_B {
+                IndexDomain: (alldc,allcc);
+            }
+            Parameter P_Result_Coefficient {
+                IndexDomain: (alldc,allcc);
+            }
+        }
+        DeclarationSection Reg_Decision_Variables {
+            Variable V_A {
+                Range: free;
+            }
+            Variable V_B {
+                Range: free;
+            }
+        }
+        DeclarationSection Reg_Constraint {
+            Constraint C_Reg_Con {
+                Definition: V_A <= 1000000;
+            }
+        }
+        DeclarationSection Reg_Objective {
+            Variable V_RegObj {
+                Range: free;
+                Definition: sum(ri | ri < P_Reg_RunningNumber, sqr(V_A * P_Reg_Distance(ri) + V_B - P_Reg_UnitTransportationCost(ri)));
+            }
+        }
+        DeclarationSection Reg_Model {
+            Set S_RegConstraints {
+                SubsetOf: AllConstraints;
+                Definition: {
+                    data {
+                    C_Reg_Con
+                    }
+                }
+            }
+            Set S_RegVariables {
+                SubsetOf: AllVariables;
+                Definition: {
+                    data {
+                    'V_A'
+                    , 'V_B'
+                    }
+                }
+            }
+            MathematicalProgram RegModel {
+                Objective: V_RegObj;
+                Direction: minimize;
+                Constraints: S_RegConstraints;
+                Variables: S_RegVariables;
+                Type: Automatic;
+            }
+        }
+        DeclarationSection Reg_Result {
+            Parameter P_Reg_A {
+                IndexDomain: rdc;
+            }
+            Parameter P_Reg_B {
+                IndexDomain: rdc;
+            }
+        }
+        DeclarationSection Reg_Enable {
+            Parameter P_RegEnable;
+        }
+    }
+    Section Output_Result {
+        DeclarationSection Output_Parameters_Declaration {
+            Parameter P_IsDCSelectedForDemandType {
+                IndexDomain: (alldc, alldt);
+                Range: binary;
+            }
+            Parameter P_IsDCCoveringCustomerCity {
+                IndexDomain: (dc,cc,sku);
+                Range: binary;
+            }
+            Parameter P_SelectedMOT {
+                IndexDomain: (dc,cc,sku);
+                Range: binary;
+            }
+            Parameter P_ServiceLevel {
+                IndexDomain: (dc,cc,sku);
+            }
+            Parameter P_SKUQuantity {
+                IndexDomain: (dc,cc,sku);
+            }
+            Parameter P_TotalSKUQuantity {
+                IndexDomain: (dc,sku);
+            }
+            Parameter P_DCTransportationCostResult {
+                IndexDomain: (dc,cc,sku);
+            }
+            Parameter P_PlantTransportationCostResult {
+                IndexDomain: (pl,dc,sku);
+            }
+            Parameter P_DCSafetyStock {
+                IndexDomain: (dc,sku);
+            }
+            Parameter P_DCSafetyStockCost {
+                IndexDomain: (dc,sku);
+            }
+            Parameter P_DCCycleStock {
+                IndexDomain: (dc,sku);
+            }
+            Parameter P_DCCycleStockCost {
+                IndexDomain: (dc,sku);
+            }
+        }
+    }
+    Section UI {
+        DeclarationSection UI_Parameters {
+            ElementParameter P_All_SKUServiceLevelAtCategoryLevel {
+                IndexDomain: allskuc;
+                Range: S_All_ServiceLevel;
+            }
+        }
+        Procedure CalDistance {
+            Arguments: (la1,la2,lon1,lon2,dis);
+            Body: {
+                dla := Pai*(la1-la2)/180;
+                dlon := Pai*(lon1-lon2)/180;
+                a := sin(dla/2)*sin(dla/2)+cos(la1*Pai/180)*cos(la2*Pai/180)*sin(dlon/2)*sin(dlon/2);
+                c := 2*arctan(sqrt(a)/sqrt(1-a));
+                dis := R*c;
+            }
+            Parameter R {
+                InitialData: 6371;
+            }
+            Parameter c;
+            Parameter Pai {
+                InitialData: 3.1415926;
+            }
+            Parameter a;
+            Parameter dlon;
+            Parameter dla;
+            Parameter la1;
+            Parameter la2;
+            Parameter lon1;
+            Parameter lon2;
+            Parameter dis;
+        }
+        Procedure Read_Excel_Input {
+            Body: {
+                empty Raw_Set;
+                empty DCFootPrint_BaseModel;
+                
+                FileSelect(
+                	filename  :  P_FileName,
+                	directory :  ,
+                	extension :  ".xlsx",
+                	title     :  );
+                
+                !P_FileName := "Sanofi_InputData-template_v1.xlsx";
+                !P_FileName := "Sanofi_InputData-template_v2.xlsx";
+                !P_FileName := "Sanofi_InputData-template_v2_DoseScenario.xlsx";
+                !P_FileName := "Sanofi_InputData-template_v2-All50000.xlsx";
+                
+                !!! Read customer data
+                empty S_All_DemandType, S_All_Region, S_All_Location, S_All_CustomerCity, P_All_CustomerCityRegion, P_All_Latitude, P_All_Longitude;
+                empty S_All_Plant, P_All_PlantDescription, S_All_DC, P_All_DCDemandType, P_All_DCFixedCost, P_All_AnnualOperationalCost, P_All_DCDescription;
+                empty S_All_SKUGroup, P_All_SKUGroupDescription, S_All_SKUCategory, P_All_SKUCategoryDescription, S_All_ServiceLevel, P_All_ServiceLevelHrs;
+                empty P_All_SKUCoverageLevel, S_All_SKU, P_All_SKUGMID, P_All_SKUCategory, P_All_SKUGroup, P_All_ProducingPlant;
+                empty P_All_SKUMaximumNumOfHandlingDC, P_All_SKULCLWeightPerUnit_Truck, P_All_SKULCLWeightPerUnit_Air, P_All_CycleStockRate;
+                empty P_All_SKUTransportCostMultiplier, P_All_SKUDescription, S_All_MOT, P_All_TravelSpeed, S_All_Customer, P_All_CustomerCity;
+                empty P_All_LocationDistance, P_All_SKUUnitTransportCostPD, P_All_PlantTransportationCost, P_All_PlantTransportationCostMultiplier;
+                empty P_All_VaccineDCTransportCostPerTruckPerKM, P_All_NumberOfVaccineCDCPerDay, P_All_ExtraCostPerStop;
+                empty P_All_AverageDoesPerPO, P_All_RegionalTransportationCostMultiplier, P_All_DCTransportationCostMultiplier, P_All_DCTransportationCost;
+                empty P_All_SingleDCSafetyStockLevel, P_All_AnnualExpiryRate, P_All_UnitValue;
+                empty P_SafetyStock, P_SequenceNumber;
+                empty P_All_DCHandingCostSameForAllDC, P_All_DCHandingCost, P_All_DCHandlingSKUC;
+                empty P_All_CustomerDemand, P_All_PieceWiseMaxQ, P_All_PieceWiseCost;
+                empty P_DCFixedCostYears, P_ServiceLevelMeetingTarget;
+                empty P_All_SKUServiceLevelAtCategoryLevel, P_All_SKUServiceLevel;
+                empty S_Reg_Date, S_Reg_DC, S_Reg_CustomerCity, P_Reg_Dose, P_Reg_TransportationCost;
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Demand Type");
+                numRows := 100;
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_DemandType, Range:dataRangeStr, Mode:'replace');
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Region");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Region, Range:dataRangeStr, Mode:'replace');
+                
+                numRows := 5000;
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Customer City");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Location, Range:dataRangeStr, Mode:'merge');
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_CustomerCity, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_CustomerCityRegion, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Latitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Longitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Plant");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Location, Range:dataRangeStr, Mode:'merge');
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Plant, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Latitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Longitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_PlantDescription, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Potential DC");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Location, Range:dataRangeStr, Mode:'merge');
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_DC, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_DCDemandType, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Latitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Longitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("F2:F%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_DCFixedCost, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("G2:G%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_AnnualOperationalCost, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("H2:H%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_DCDescription, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"SKU Group Category");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_SKUGroup, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUGroupDescription, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"SKU Category");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_SKUCategory, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUCategoryDescription, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Service Level");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_ServiceLevel, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_ServiceLevelHrs, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"SKU Category Coverage Level");
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUCoverageLevel, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                ! Origianl Place for P_All_SKUCoverageLevel setting
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"SKU");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_SKU, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUGMID, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUCategory, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                ! Original place for service level setting
+                
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUGroup, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("F2:F%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_ProducingPlant, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("G2:G%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUMaximumNumOfHandlingDC, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("H2:H%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKULCLWeightPerUnit_Truck, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("I2:I%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKULCLWeightPerUnit_Air, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("J2:J%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_CycleStockRate, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("K2:K%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUTransportCostMultiplier, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("L2:L%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUDescription, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Mode of Transport");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_MOT, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_TravelSpeed, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Customer");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Location, Range:dataRangeStr, Mode:'merge');
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_All_Customer, Range:dataRangeStr, Mode:'replace');
+                
+                !rowRangeStr := formatString("A2:A%i",numRows);
+                !dataRangeStr := formatString("B2:B%i", numRows);
+                !SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Latitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                !dataRangeStr := formatString("C2:C%i", numRows);
+                !SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_Longitude, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_CustomerCity, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                for (alll, alll2) do
+                	CalDistance(P_All_Latitude(alll), P_All_Latitude(alll2), P_All_Longitude(alll), P_All_Longitude(alll2), P_All_LocationDistance(alll, alll2));
+                endfor;
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Plant Transport Cost");
+                rowRangeStr := formatString("C2:C%i",numRows);
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SKUUnitTransportCostPD, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                P_All_PlantTransportationCost(allpl, alldc, allsku) := P_All_SKUUnitTransportCostPD(allsku) * P_All_LocationDistance(allpl, alldc);
+                
+                P_All_PlantTransportationCostMultiplier(allpl, alldc, allsku) := 1;
+                
+                ! Added already - missing vaccine data for PlantTransportationCost
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Regional TransportCost Multip");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_AverageDoesPerPO, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_RegionalTransportationCostMultiplier, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Safety Stock Cost");
+                rowRangeStr := formatString("A2:A%i",numRows);
+                dataRangeStr := formatString("B2:B%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_SingleDCSafetyStockLevel, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_AnnualExpiryRate, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_UnitValue, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Safety Stock Rate Per No DC");
+                rowRangeStr := formatString("B2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_SafetyStock, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                ! Origianl place for P_SequenceNumber
+                
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"DC Handling Cost");
+                rowRangeStr := formatString("B2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_DCHandingCostSameForAllDC, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                P_All_DCHandingCost(alldc, allsku) := P_All_DCHandingCostSameForAllDC(allsku);
+                
+                P_All_DCHandlingSKUC(alldc, allskuc) := 1;
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"DC Handling SKU Category");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_DCHandlingSKUC, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                ! (DONE) Pending check with missing customers / cities
+                numRows := 100000;
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Annual Demand");
+                rowRangeStr := formatString("A2:C%i",numRows);
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_CustomerDemand, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                numRows := 1000;
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Piecewise Linear Transport Cost");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_PieceWiseMaxQ, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_All_PieceWiseCost, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                P_All_PieceWiseCost(allsku, seq) := P_All_SKUUnitTransportCostPD(allsku) * P_All_PieceWiseCost(allsku, seq);
+                
+                numRows := 100000;
+                SpreadSheet::SetActiveSheet(Workbook:P_FileName, Name:"Historical Transportation Cost");
+                dataRangeStr := formatString("A2:A%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_Reg_Date, Range:dataRangeStr, Mode:'replace');
+                
+                dataRangeStr := formatString("B2:B%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_Reg_DC, Range:dataRangeStr, Mode:'replace');
+                
+                dataRangeStr := formatString("C2:C%i",numRows);
+                SpreadSheet::RetrieveSet(Workbook:P_FileName, Set:S_Reg_CustomerCity, Range:dataRangeStr, Mode:'replace');
+                
+                rowRangeStr := formatString("A2:C%i",numRows);
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_Reg_Dose, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                rowRangeStr := formatString("A2:C%i",numRows);
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::RetrieveTable(Workbook:P_FileName, Parameter:P_Reg_TransportationCost, DataRange:dataRangeStr, RowsRange:rowRangeStr);
+                
+                
+                
+                Spreadsheet::CloseWorkbook(P_FileName, 0);
+                
+                !add initial values
+                P_ToIncludeSKUCInRun(allskuc) := 1;
+                for (allskuc | allskuc = 'AT') do
+                	P_ToIncludeSKUCInRun(allskuc) := 0;
+                endfor;
+                
+                P_UI_SKUCategorySelectedCoverageRange(allskuc) := 'SL_1DAY';
+                P_UI_SKUCategorySelectedServiceLevel(allskuc) := 'SL_2DAY';
+                for (allskuc | allskuc = 'C') do
+                	P_UI_SKUCategorySelectedServiceLevel(allskuc) := 'SL_3DAY';
+                endfor;
+                
+                P_ToIncludeDemandType(alldt) := 1;
+                P_UI_DemandMultiplier := 1;
+                P_UI_DCTransCostMultiplier := 1;
+                P_NumFixedDC(dt) := 0;
+                P_OneDayCoverageDistance('Truck') := 600;
+                P_OneDayCoverageDistance('Air') := 3000;
+                P_All_CanUseAirFlag := 0;
+                P_UI_IsRegionAllowAir(allr) := 0;
+                P_UI_IsDCAllowAir(alldc) := 0;
+                P_ToIncludePotentialDC(alldc) := 1;
+                P_UI_PrefixedDC(alldc, alldt) := 0;
+                
+                P_DCFixedCostYears := 3;
+                P_ServiceLevelMeetingTarget(allskug) := 0.95;
+                P_All_VaccineDCTransportCostPerTruckPerKM := 11.3;
+                P_All_NumberOfVaccineCDCPerDay := 4;
+                P_All_ExtraCostPerStop := 600;
+                
+                P_Weight_DCFixedCost := 1;
+                P_Weight_DCHandlingCost := 1;
+                P_Weight_DCOperationalCost := 1;
+                P_Weight_DCTransportationCost := 1;
+                P_Weight_PlantTransportationCost := 1;
+                P_Weight_DCSafetyStockCost := 1;
+                
+                P_Solved := 0;
+                P_UI_SolvingTimeLimit := 100;
+                
+                P_UI_IsReadOnly := 1;
+                
+                P_RegEnable := 1;
+            }
+            StringParameter P_FileName;
+            Parameter numRows;
+            StringParameter dataRangeStr;
+            StringParameter rowRangeStr;
+            Parameter runningNumber;
+        }
+        Section UI_Parameter_Setting {
+            DeclarationSection UI_Parameter_Declaration {
+                Parameter P_ToIncludeSKUCInRun {
+                    IndexDomain: allskuc;
+                }
+                ElementParameter P_UI_SKUCategorySelectedCoverageRange {
+                    IndexDomain: allskuc;
+                    Range: S_All_ServiceLevel;
+                }
+                ElementParameter P_UI_SKUCategorySelectedServiceLevel {
+                    IndexDomain: allskuc;
+                    Range: S_All_ServiceLevel;
+                }
+                Parameter P_OneDayCoverageDistance {
+                    IndexDomain: allmot;
+                }
+                Parameter P_All_CanUseAirFlag {
+                    Range: binary;
+                }
+                Parameter P_ToIncludeDemandType {
+                    IndexDomain: alldt;
+                }
+                Parameter P_UI_DemandMultiplier {
+                    InitialData: 1;
+                }
+                Parameter P_UI_DCTransCostMultiplier {
+                    InitialData: 1;
+                }
+                Parameter P_NumFixedDC {
+                    IndexDomain: alldt;
+                }
+                Parameter P_ToIncludePotentialDC {
+                    IndexDomain: alldc;
+                }
+                Parameter P_UI_PrefixedDC {
+                    IndexDomain: (alldc, alldt);
+                }
+                Parameter P_Solved;
+                Parameter P_UI_SolvingTimeLimit;
+                Parameter P_Actual_SolvingTimeLimit;
+                Parameter P_UI_IsRegionAllowAir {
+                    IndexDomain: allr;
+                }
+                Parameter P_UI_IsDCAllowAir {
+                    IndexDomain: alldc;
+                }
+                Parameter P_UI_IsReadOnly;
+                Parameter P_Weight_DCFixedCost;
+                Parameter P_Weight_DCHandlingCost;
+                Parameter P_Weight_DCOperationalCost;
+                Parameter P_Weight_DCTransportationCost;
+                Parameter P_Weight_PlantTransportationCost;
+                Parameter P_Weight_DCSafetyStockCost;
+            }
+            Procedure ChooseSelectedDCsAsPotential {
+                Body: {
+                    if (P_Solved) then
+                    	for (alldc) do
+                    		P_ToIncludePotentialDC(alldc) := 0;
+                    
+                    		if (sum(alldt, P_IsDCSelectedForDemandType(alldc, alldt) > 0)) then
+                    			P_ToIncludePotentialDC(alldc) := 1;
+                    		endif;
+                    	endfor;
+                    else
+                    	P_ToIncludePotentialDC(alldc) := 1;
+                    endif;
+                }
+            }
+            Procedure ResetAllDC {
+                Body: {
+                    P_ToIncludePotentialDC(alldc) := 1;
+                }
+            }
+            Procedure WarnningOnLongerCoverageLevel {
+                Body: {
+                    for (allskuc) do
+                    	if P_ServiceLevelHrs(P_UI_SKUCategorySelectedCoverageRange(allskuc)) > P_ServiceLevelHrs(P_UI_SKUCategorySelectedServiceLevel(allskuc)) then 
+                    		dialogMessage("Coverage Level cannot be longer than Service Level.", "Error Message");
+                    	endif;
+                    endfor;
+                }
+            }
+            Procedure WarnningOnShorterServiceLevel {
+                Body: {
+                    for (allskuc) do
+                    	if P_ServiceLevelHrs(P_UI_SKUCategorySelectedCoverageRange(allskuc)) > P_ServiceLevelHrs(P_UI_SKUCategorySelectedServiceLevel(allskuc)) then 
+                    		dialogMessage("Service Level cannot be shorter than Coverage Level.", "Error Message");
+                    	endif;
+                    endfor;
+                }
+            }
+        }
+        Section UI_Color_Setting {
+            DeclarationSection UI_Color_Declaration {
+                ElementParameter P_Color_InputData {
+                    Range: AllColors;
+                    InitialData: 'Black';
+                }
+                ElementParameter P_Color_ParameterSetting {
+                    Range: AllColors;
+                    InitialData: 'Black';
+                }
+                ElementParameter P_Color_DerivedData {
+                    Range: AllColors;
+                    InitialData: 'Black';
+                }
+                ElementParameter P_Color_Result {
+                    Range: AllColors;
+                    InitialData: 'Black';
+                }
+            }
+            Procedure Click_InputData {
+                Body: {
+                    P_Color_InputData := 'Blue';
+                    
+                    P_Color_ParameterSetting := 'Black';
+                    P_Color_DerivedData := 'Black';
+                    P_Color_Result := 'Black';
+                }
+            }
+            Procedure Click_ParameterSetting {
+                Body: {
+                    P_Color_ParameterSetting := 'Blue';
+                    
+                    P_Color_InputData := 'Black';
+                    P_Color_DerivedData := 'Black';
+                    P_Color_Result := 'Black';
+                }
+            }
+            Procedure Click_DerivedData {
+                Body: {
+                    P_Color_DerivedData := 'Blue';
+                    
+                    P_Color_ParameterSetting := 'Black';
+                    P_Color_InputData := 'Black';
+                    P_Color_Result := 'Black';
+                }
+            }
+            Procedure Click_Result {
+                Body: {
+                    P_Color_Result := 'Blue';
+                    
+                    P_Color_ParameterSetting := 'Black';
+                    P_Color_DerivedData := 'Black';
+                    P_Color_InputData := 'Black';
+                }
+            }
+        }
+        Procedure UI_Setting {
+            Body: {
+                ! For Simulation
+                !P_All_SKUCoverageLevel(allskuc) := 'SL_2DAY';
+                !P_All_SKUCoverageLevel('F') := 'SL_1DAY';
+                !P_All_SKUCoverageLevel('C') := 'SL_1DAY';
+                P_All_SKUCoverageLevel(allSKUC) := P_UI_SKUCategorySelectedCoverageRange(allskuc);
+                
+                ! P_All_SKUServiceLevel(allsku) is populated from User Input in UI
+                ! Note that servive level need to be longer or same as coverage level
+                !P_All_SKUServiceLevelAtCategoryLevel(allskuc) := 'SL_2DAY';
+                !P_All_SKUServiceLevelAtCategoryLevel('F') := 'SL_2DAY';
+                !P_All_SKUServiceLevelAtCategoryLevel('C') := 'SL_4DAY';
+                !P_All_SKUServiceLevelAtCategoryLevel('AT') := 'SL_4DAY';
+                P_All_SKUServiceLevelAtCategoryLevel(allSKUC) := P_UI_SKUCategorySelectedServiceLevel(allskuc);
+                P_All_SKUServiceLevel(allsku) := P_All_SKUServiceLevelAtCategoryLevel(P_All_SKUCategory(allsku));
+                
+                ! Default is 25 now
+                !P_All_TravelSpeed('Truck') := 25;
+                P_All_TravelSpeed(allmot) := P_OneDayCoverageDistance(allmot)/24;
+                
+                !for(allr, allskug) do
+                !	if (P_All_AverageDoesPerPO(allr, allskug) < 4800) then
+                !		P_All_AverageDoesPerPO(allr, allskug) := 4800;
+                !	endif;
+                !endfor;
+                
+                ! Note that P_DemandMultiplier will be used everytime this procedure is called
+                ! So it is proceed during Populate_Model_Input
+                !P_All_CustomerDemand(allcs, allsku, alldt) := P_All_CustomerDemand(allcs, allsku, alldt) * P_DemandMultiplier;
+                
+                ! Below parameters are default values, they can be overwritten by UI
+                !P_ServiceLevelMeetingTarget := p_UICoverageRangeTarget;
+            }
+        }
+        Procedure Regression {
+            Body: {
+                empty P_Reg_A, P_Reg_B;
+                
+                ! Regression formula for each rdc
+                empty P_Reg_Distance, P_Reg_UnitTransportationCost;
+                !for (rcc | rcc ='合肥市') do
+                for (rdc) do
+                	empty P_Reg_Distance, P_Reg_UnitTransportationCost;
+                
+                	P_Reg_RunningNumber := first(S_Reg_Integer);
+                	for(rdate, rcc) do
+                		if (P_Reg_Dose(rdate, rdc, rcc) > 0 and P_Reg_TransportationCost(rdate, rdc, rcc) > 0) then
+                			P_Reg_Distance(P_Reg_RunningNumber) := P_All_LocationDistance(rdc, rcc);
+                			P_Reg_UnitTransportationCost(P_Reg_RunningNumber) := P_Reg_TransportationCost(rdate, rdc, rcc) / P_Reg_Dose(rdate, rdc, rcc);
+                
+                			P_Reg_RunningNumber := P_Reg_RunningNumber + 1;
+                		endif;
+                	endfor;
+                
+                	if (P_Reg_RunningNumber > first(S_Reg_Integer)) then
+                		solve RegModel;
+                
+                		P_Reg_A(rdc) := V_A;
+                		P_Reg_B(rdc) := V_B;
+                
+                		empty V_A, V_B, V_RegObj, S_RegConstraints, S_RegVariables, RegModel;
+                		empty P_Reg_Distance, P_Reg_UnitTransportationCost;
+                	endif;
+                endfor;
+                
+                !Real unit transportation cost for each rdc-rcc pair
+                empty P_Total_TransportationCost, P_Total_Dose, P_UnitTransportationCost, P_Coefficient;
+                for (rdc, rcc) do
+                	P_Total_TransportationCost(rdc, rcc) := 0;
+                	P_Total_Dose(rdc, rcc) := 0;
+                	P_UnitTransportationCost(rdc, rcc) := 0;
+                
+                	P_Coefficient(rdc, rcc) := 0;
+                
+                	for(rdate) do
+                		if (P_Reg_Dose(rdate, rdc, rcc) > 0 and P_Reg_TransportationCost(rdate, rdc, rcc) > 0) then
+                			P_Total_TransportationCost(rdc, rcc) := P_Total_TransportationCost(rdc, rcc) + P_Reg_TransportationCost(rdate, rdc, rcc);
+                			P_Total_Dose(rdc, rcc) := P_Total_Dose(rdc, rcc) + P_Reg_Dose(rdate, rdc, rcc);
+                		endif;
+                	endfor;
+                
+                	if (P_Total_Dose(rdc, rcc) > 0) then
+                		P_UnitTransportationCost(rdc, rcc) := P_Total_TransportationCost(rdc, rcc) / P_Total_Dose(rdc, rcc);
+                	endif;
+                
+                	if (P_Reg_A(rdc) * P_All_LocationDistance(rdc, rcc) + P_Reg_B(rdc) > 0) then 
+                		P_Coefficient(rdc, rcc) := P_UnitTransportationCost(rdc, rcc) / (P_Reg_A(rdc) * P_All_LocationDistance(rdc, rcc) + P_Reg_B(rdc));
+                	endif;
+                endfor;
+                
+                empty P_NearestDistance, P_NearestDC, P_NearestCC, P_UsedCoefficient;
+                empty P_RegResult_UnitTransportationCost;
+                empty P_Result_A, P_Result_B, P_Result_Coefficient;
+                for(alldc, allcc) do
+                	P_NearestDistance := 10000000;
+                	for(rdc) do
+                		if (P_All_LocationDistance(alldc, rdc) < P_NearestDistance) then
+                			P_NearestDistance := P_All_LocationDistance(alldc, rdc);
+                			P_NearestDC := rdc;
+                		endif;
+                	endfor;
+                
+                	P_NearestDistance := 10000000;
+                	for(rcc) do
+                		if (P_All_LocationDistance(allcc, rcc) < P_NearestDistance) then
+                			P_NearestDistance := P_All_LocationDistance(allcc, rcc);
+                			P_NearestCC := rcc;
+                		endif;
+                	endfor;
+                
+                	P_UsedCoefficient := P_Coefficient(P_NearestDC, P_NearestCC);
+                	if (P_UsedCoefficient = 0) then 
+                		for(rdc) do
+                			if (P_Coefficient(rdc, P_NearestCC) > 0) then
+                				P_UsedCoefficient := P_Coefficient(rdc, P_NearestCC);
+                			endif;
+                		endfor;
+                	endif;
+                
+                	!P_RegResult_UnitTransportationCost(alldc, allcc) := (P_Reg_A(P_NearestDC) * P_All_LocationDistance(alldc, allcc) + P_Reg_B(P_NearestDC))
+                	!						    * P_UsedCoefficient;
+                
+                	P_Result_A(alldc, allcc) := P_Reg_A(P_NearestDC);
+                	P_Result_B(alldc, allcc) := P_Reg_B(P_NearestDC);
+                	P_Result_Coefficient(alldc, allcc) := P_UsedCoefficient;
+                
+                	!P_RegResult_UnitTransportationCost(alldc, allcc) := (P_Result_A(alldc, allcc) * P_All_LocationDistance(alldc, allcc) + P_Result_B(alldc, allcc))
+                	!						    * P_Result_Coefficient(alldc, allcc);
+                endfor;
+            }
+        }
+        Procedure Calculation {
+            Body: {
+                P_All_DCTransportationCostMultiplier(alldc, allcc, allsku, allmot) := 1;
+                for (allsku) do
+                	if (P_All_SKUGroup(allsku) = "Rx") then
+                		for (allmot) do
+                			if (allmot = "Truck") then
+                				if (P_RegEnable = 0) then
+                					!initial formula based on LCL		
+                					P_All_DCTransportationCost(alldc, allcc, allsku, allmot)
+                						:= (0.0006 * P_All_LocationDistance(alldc, allcc) + 1.03)
+                					   	* P_All_SKULCLWeightPerUnit_Truck(allsku);
+                				elseif (P_RegEnable = 1) then
+                					! new formula based on regression analysis
+                					P_RegResult_UnitTransportationCost(alldc, allcc) := (P_Result_A(alldc, allcc) * P_All_LocationDistance(alldc, allcc) + P_Result_B(alldc, allcc))
+                							    			    		* P_Result_Coefficient(alldc, allcc);
+                					P_All_DCTransportationCost(alldc, allcc, allsku, allmot) := P_RegResult_UnitTransportationCost(alldc, allcc);
+                					P_All_DCTransportationCost(alldc, allcc, allsku, allmot) := P_All_DCTransportationCost(alldc, allcc, allsku, allmot) / 0.92;
+                				endif;
+                			elseif (allmot = "Air") then
+                				P_All_DCTransportationCost(alldc, allcc, allsku, allmot) 
+                					:= (0.0063 * P_All_LocationDistance(alldc, allcc) - 1.02)
+                					   * P_All_SKULCLWeightPerUnit_Air(allsku);
+                			endif;
+                		endfor;
+                	!elseif (P_All_SKUGroup(allsku) = "Vx") then
+                	elseif (P_All_SKUGroup(allsku) = "VF" or P_All_SKUGroup(allsku) = "CC") then
+                		for (allmot) do
+                			if(allmot = "Truck") then
+                				if (P_All_ServiceLevelHrs(P_All_SKUServiceLevel(allsku)) >= P_All_ServiceLevelHrs(P_All_SKUCoverageLevel(P_All_SKUCategory(allsku)))) then
+                					P_All_DCTransportationCost(alldc, allcc, allsku, allmot)
+                		 			 := (((P_All_LocationDistance(alldc, allcc) * P_All_VaccineDCTransportCostPerTruckPerKM
+                		      			     + ((P_All_ServiceLevelHrs(P_All_SKUServiceLevel(allsku))/24 - P_All_ServiceLevelHrs(P_All_SKUCoverageLevel(P_All_SKUCategory(allsku)))/24 + 1)
+                		         			* P_All_NumberOfVaccineCDCPerDay - 1) * P_All_ExtraCostPerStop)
+                		      			     / ((P_All_ServiceLevelHrs(P_All_SKUServiceLevel(allsku))/24 - P_All_ServiceLevelHrs(P_All_SKUCoverageLevel(P_All_SKUCategory(allsku)))/24 + 1)
+                		     	 			 * P_All_NumberOfVaccineCDCPerDay))
+                		     			   / P_All_AverageDoesPerPO(P_All_CustomerCityRegion(allcc), P_All_SKUGroup(allsku)))
+                		     			   * P_All_RegionalTransportationCostMultiplier(P_All_CustomerCityRegion(allcc), P_All_SKUGroup(allsku));
+                				elseif (P_All_ServiceLevelHrs(P_All_SKUServiceLevel(allsku)) < P_All_ServiceLevelHrs(P_All_SKUCoverageLevel(P_All_SKUCategory(allsku)))) then
+                ! Data needs to ensure that service level >= Coverage level, otherwise has problem
+                					P_All_DCTransportationCost(alldc, allcc, allsku, allmot) := 1000;
+                				endif;
+                			elseif(allmot = "Air") then
+                ! Above formula is for truck only, need air formula
+                ! Same as pharma air formula
+                				P_All_DCTransportationCost(alldc, allcc, allsku, allmot) 
+                					:= (0.0063 * P_All_LocationDistance(alldc, allcc) - 1.02)
+                					   * P_All_SKULCLWeightPerUnit_Air(allsku)
+                					   * P_All_RegionalTransportationCostMultiplier(P_All_CustomerCityRegion(allcc), P_All_SKUGroup(allsku));
+                			endif;
+                		endfor;
+                	endif;
+                endfor;
+                
+                ! Below is not a good way, use constraint to handle instead
+                ! Hand Same Location cost
+                !for (alldc, allcc) do
+                	!if (P_All_Latitude(alldc) = P_All_Latitude(allcc) and P_All_Longitude(alldc) = P_All_Longitude(allcc)) then
+                		!P_All_DCTransportationCost(alldc, allcc, allsku, 'Truck') := 0.01;
+                		!P_All_DCTransportationCost(alldc, allcc, allsku, 'Air') := 10;
+                	!endif;
+                !endfor;
+                
+                ! Requested by Sanofi
+                ! Note that P_DemandMultiplier will be used everytime this procedure is called
+                ! So it is proceed during Populate_Model_Input
+                !P_All_DCTransportationCost(alldc, allcc, allsku, allmot) := 0.92 * P_All_DCTransportationCost(alldc, allcc, allsku, allmot);
+                !P_All_DCTransportationCost(alldc, allcc, allsku, allmot) := P_All_SKUTransportCostMultiplier(allsku) * P_All_DCTransportationCost(alldc, allcc, allsku, allmot) * P_DCTransCostMultiplier;
+            }
+        }
+        Procedure Set_Model_Domain {
+            Body: {
+                empty S_Existing_DemandType, S_Existing_DC, S_Existing_SKUCategory, S_Existing_SKU, S_Existing_MOT;
+                
+                for(alldt | P_ToIncludeDemandType(alldt)) do
+                  S_Existing_DemandType := S_Existing_DemandType + alldt;
+                endfor;
+                
+                !S_Existing_DC := S_All_DC;
+                for(alldc | P_All_DCDemandType(alldc) in S_Existing_DemandType and P_ToIncludePotentialDC(alldc)) do
+                	S_Existing_DC := S_Existing_DC + alldc;
+                endfor;
+                !S_Existing_DC := S_Existing_DC + 'HZDC';
+                !S_Existing_DC := S_Existing_DC + 'CDDC';
+                !S_Existing_DC := S_Existing_DC + 'GZDC';
+                !S_Existing_DC := S_Existing_DC + 'CCDC';
+                !S_Existing_DC := S_Existing_DC + 'YCDC';
+                !S_Existing_DC := S_Existing_DC + 'JNDC';
+                !S_Existing_DC := S_Existing_DC + 'WHDC';
+                
+                !S_Existing_SKUCategory := S_All_SKUCategory;
+                
+                !S_Existing_SKUCategory := S_Existing_SKUCategory + 'C';
+                !S_Existing_SKUCategory := S_Existing_SKUCategory + 'F';
+                for(allskuc | P_ToIncludeSKUCInRun(allskuc)) do
+                  S_Existing_SKUCategory := S_Existing_SKUCategory + allskuc;
+                endfor;
+                !S_Existing_SKUCategory := S_Existing_SKUCategory + 'AT';
+                
+                !S_Existing_SKU := S_Existing_SKU + '307793';
+                !S_Existing_SKU := S_All_SKU;
+                !for(allsku) do
+                !	if (P_All_SKUGroup(allsku) = 'Vx') then
+                !	!if (P_All_SKUGroup(allsku) = 'Rx') then
+                !		S_Existing_SKU := S_Existing_SKU + allsku;
+                !	endif;
+                !endfor;
+                for(allsku) do
+                	!if (P_All_SKUCategory(allsku) = 'C' or P_All_SKUCategory(allsku) = 'F') then
+                	if(P_All_SKUCategory(allsku) in S_Existing_SKUCategory) then
+                	!if (P_All_SKUCategory(allsku) = 'AT') then
+                		S_Existing_SKU := S_Existing_SKU + allsku;
+                	endif;
+                endfor;
+                
+                if (P_All_CanUseAirFlag = 0) then
+                	S_Existing_MOT := S_Existing_MOT + 'Truck';
+                elseif (P_All_CanUseAirFlag = 1) then
+                	S_Existing_MOT := S_All_MOT;
+                endif;
+            }
+        }
+        Procedure Populate_Model_Input {
+            Body: {
+                !!! Populate Model Input
+                ! Below is raw input that has been used in calculation
+                ! P_All_SKULCLWeightPerUnit_Truck, P_All_SKULCLWeightPerUnit_Air, P_All_SKUTransportCostMultiplier;
+                ! P_All_SKUUnitTransportCostPD
+                ! P_All_VaccineDCTransportCostPerTruckPerKM, P_All_NumberOfVaccineCDCPerDay, P_All_ExtraCostPerStop;
+                ! P_All_AverageDoesPerPO
+                ! P_All_DCHandingCostSameForAllDC
+                ! P_All_SKUServiceLevelAtCategoryLevel
+                
+                
+                
+                ! Below is raw input that may be used in report
+                ! P_All_PlantDescription, P_All_DCDescription, P_All_SKUGroupDescription, P_All_SKUCategoryDescription
+                ! P_All_SKUGMID, P_All_SKUDescription
+                
+                
+                
+                ! Below is raw input that will be used in model
+                ! P_All_LocationDistance
+                
+                
+                
+                ! Below is model input that has been defined in raw input
+                ! P_SafetyStock, P_SequenceNumber
+                ! P_ServiceLevelMeetingTarget
+                ! P_DCFixedCostYears
+                
+                
+                
+                ! Below is model input that has been defined during intialization
+                ! S_Model_Sequence
+                
+                
+                
+                ! Below is model defined input which is NOT usesful
+                ! P_SKULCLWeight, P_LCLCost
+                
+                empty DCFootPrint_BaseModel;
+                empty Decision_Variables_Declaration;
+                empty S_Model_DemandType, S_Model_Region, S_Model_Location, S_Model_CustomerCity, P_CustomerCityRegion, P_Latitude, P_Longitude;
+                empty S_Model_Plant, S_Model_DC, P_DCDemandType, P_DCFixedCost, P_AnnualOperationalCost;
+                empty S_Model_SKUGroup, S_Model_SKUCategory, S_Model_ServiceLevel, P_ServiceLevelHrs;
+                empty P_SKUCoverageLevel, S_Model_SKU, P_SKUCategory, P_SKUGroup, P_ProducingPlant;
+                empty P_SKUMaximumNumOfHandlingDC, P_CycleStockRate; !P_SKUTransportCostMultiplier;
+                empty S_Model_MOT, P_TravelSpeed, S_Model_Customer, P_CustomerCity;
+                empty P_PlantTransportationCost, P_PlantTransportationCostMultiplier;
+                empty P_RegionalTransportationCostMultiplier, P_DCTransportationCostMultiplier, P_DCTransportationCost;
+                empty P_SingleDCSafetyStockLevel, P_AnnualExpiryRate, P_UnitValue;
+                empty P_DCHandingCost, P_DCHandlingSKUC;
+                empty P_CustomerDemand, P_PieceWiseMaxQ, P_PieceWiseCost;
+                empty P_SKUServiceLevel;
+                
+                ! --> Note with Model Domain
+                !S_Model_DemandType := S_All_DemandType;
+                S_Model_DemandType := S_Existing_DemandType;
+                ! <-- Note with Model Domain
+                S_Model_Region := S_All_Region;
+                S_Model_Location := S_All_Location;
+                S_Model_CustomerCity := S_All_CustomerCity;
+                P_CustomerCityRegion(cc) := P_All_CustomerCityRegion(cc);
+                P_Latitude(l) := P_All_Latitude(l);
+                P_Longitude(l) := P_All_Longitude(l);
+                
+                S_Model_Plant := S_All_Plant;
+                !S_Model_DC := S_All_DC;
+                ! --> Note with Model Domain
+                S_Model_DC := S_Existing_DC;
+                ! <-- Note with Model Domain
+                P_DCDemandType(dc) := P_All_DCDemandType(dc);
+                P_DCFixedCost(dc) := P_All_DCFixedCost(dc);
+                P_AnnualOperationalCost(dc) := P_All_AnnualOperationalCost(dc);
+                
+                S_Model_SKUGroup := S_All_SKUGroup;
+                ! --> Note with Model Domain
+                !S_Model_SKUCategory := S_All_SKUCategory;
+                S_Model_SKUCategory := S_Existing_SKUCategory;
+                ! <-- Note with Model Domain
+                
+                S_Model_ServiceLevel := S_All_ServiceLevel;
+                P_ServiceLevelHrs(sl) := P_All_ServiceLevelHrs(sl);
+                
+                P_SKUCoverageLevel(skuc) := P_All_SKUCoverageLevel(skuc);
+                !S_Model_SKU := S_All_SKU;
+                ! --> Note with Model Domain
+                S_Model_SKU := S_Existing_SKU;
+                ! <-- Note with Model Domain
+                P_SKUCategory(sku) := P_All_SKUCategory(sku);
+                P_SKUGroup(sku) := P_All_SKUGroup(sku);
+                P_ProducingPlant(sku) := P_All_ProducingPlant(sku);
+                
+                P_SKUMaximumNumOfHandlingDC(sku) := P_All_SKUMaximumNumOfHandlingDC(sku);
+                P_CycleStockRate(sku) := P_All_CycleStockRate(sku);
+                !P_SKUTransportCostMultiplier(sku) := P_All_SKUTransportCostMultiplier(sku);
+                ! --> Note with Model Domain
+                !S_Model_MOT := S_All_MOT;
+                S_Model_MOT := S_Existing_MOT;
+                ! <-- Note with Model Domain
+                P_TravelSpeed(mot) := P_All_TravelSpeed(mot);
+                S_Model_Customer := S_All_Customer;
+                P_CustomerCity(cs) := P_All_CustomerCity(cs);
+                
+                P_PlantTransportationCost(pl, dc, sku) := P_All_PlantTransportationCost(pl, dc, sku);
+                P_PlantTransportationCostMultiplier(pl, dc, sku) := P_All_PlantTransportationCostMultiplier(pl, dc, sku);
+                !P_PlantTransportationCost(pl, dc, sku) := P_PlantTransportationCost(pl, dc, sku) * P_PlantTransportationCostMultiplier(pl, dc, sku);
+                
+                P_RegionalTransportationCostMultiplier(r, skug) := P_All_RegionalTransportationCostMultiplier(r, skug);
+                P_DCTransportationCostMultiplier(dc, cc, sku, mot) := P_All_DCTransportationCostMultiplier(dc, cc, sku, mot);
+                
+                ! UI Change
+                P_DCTransportationCost(dc, cc, sku, mot) := P_All_DCTransportationCost(dc, cc, sku, mot) * 0.92;
+                P_DCTransportationCost(dc, cc, sku, mot) := P_DCTransportationCost(dc, cc, sku, mot) * P_All_SKUTransportCostMultiplier(sku);
+                P_DCTransportationCost(dc, cc, sku, mot) := P_DCTransportationCost(dc, cc, sku, mot) * P_UI_DCTransCostMultiplier;
+                
+                P_SingleDCSafetyStockLevel(sku) := P_All_SingleDCSafetyStockLevel(sku);
+                P_AnnualExpiryRate(sku) := P_All_AnnualExpiryRate(sku);
+                P_UnitValue(sku) := P_All_UnitValue(sku);
+                
+                P_DCHandingCost(dc, sku) := P_All_DCHandingCost(dc, sku);
+                P_DCHandlingSKUC(dc, skuc) := P_All_DCHandlingSKUC(dc, skuc);
+                
+                ! UI Change
+                P_CustomerDemand(cs, sku, dt) := P_All_CustomerDemand(cs, sku, dt) * P_UI_DemandMultiplier;
+                P_PieceWiseMaxQ(sku, seq) := P_All_PieceWiseMaxQ(sku, seq);
+                P_PieceWiseCost(sku, seq) := P_All_PieceWiseCost(sku, seq);
+                
+                P_SKUServiceLevel(sku) := P_All_SKUServiceLevel(sku);
+                
+                
+                
+                P_RunningNumber := 1;
+                for (seq) do
+                	if (P_RunningNumber <= Card(S_Model_DC)) then
+                		P_SequenceNumber(seq) := P_RunningNumber;
+                		P_RunningNumber := P_RunningNumber + 1;
+                	endif;
+                endfor;
+                
+                
+                
+                ! Below can be overwritten by UI
+                P_MinimumNumberOfDCs := 0;
+                P_MaximumNumberOfDCs := Card(S_Model_DC);
+                
+                P_IsDCFixed(dc, dt) := P_UI_PrefixedDC(dc, dt);
+                P_MinimumDC(dt) := 0;
+                P_MaximumDC(dt) := Card(S_Model_DC);
+                
+                empty P_CustomerCityDemand;
+                for (cs) do
+                	P_CustomerCityDemand(P_CustomerCity(cs), sku, dt) := P_CustomerCityDemand(P_CustomerCity(cs), sku, dt) + P_CustomerDemand(cs, sku, dt);
+                endfor;
+                
+                P_ServiceLevelDays(sl) := P_ServiceLevelHrs(sl)/24;
+                
+                empty P_MOTMeetCoverageServiceLevel;
+                for (dc, cc, sku) do
+                	!if (P_SKUGroup(sku) = 'Vx') then
+                	if (P_SKUGroup(sku) = 'VF' or P_SKUGroup(sku) = 'CC') then
+                		if (P_All_CanUseAirFlag = 0) then
+                			! note the diff between Pharma and Vaccine Service Level
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUCoverageLevel(P_SKUCategory(sku))) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                			endif;
+                			!P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                		elseif (P_UI_IsRegionAllowAir(P_CustomerCityRegion(cc)) = 0 or P_UI_IsDCAllowAir(dc) = 0) then
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUCoverageLevel(P_SKUCategory(sku))) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                			endif;		
+                		elseif (P_DCTransportationCost(dc, cc, sku, 'Air') <= P_DCTransportationCost(dc, cc, sku, 'Truck')) then
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Air')) <= P_ServiceLevelHrs(P_SKUCoverageLevel(P_SKUCategory(sku))) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Air';
+                			endif;
+                		elseif (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUCoverageLevel(P_SKUCategory(sku))) then
+                			P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                		elseif (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Air')) <= P_ServiceLevelHrs(P_SKUCoverageLevel(P_SKUCategory(sku))) then
+                			P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Air';
+                		endif;
+                	elseif (P_SKUGroup(sku) = 'Rx') then
+                		if (P_All_CanUseAirFlag = 0) then
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUServiceLevel(sku)) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                			endif;
+                			!P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                		elseif (P_UI_IsRegionAllowAir(P_CustomerCityRegion(cc)) = 0 or P_UI_IsDCAllowAir(dc) = 0) then
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUServiceLevel(sku)) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                			endif;		
+                		elseif (P_DCTransportationCost(dc, cc, sku, 'Air') <= P_DCTransportationCost(dc, cc, sku, 'Truck')) then
+                			if (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Air')) <= P_ServiceLevelHrs(P_SKUServiceLevel(sku)) then
+                				P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Air';
+                			endif;
+                		elseif (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Truck')) <= P_ServiceLevelHrs(P_SKUServiceLevel(sku)) then
+                			P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Truck';
+                		elseif (P_All_LocationDistance(dc, cc) / P_TravelSpeed('Air')) <= P_ServiceLevelHrs(P_SKUServiceLevel(sku)) then
+                			P_MOTMeetCoverageServiceLevel(dc, cc, sku) := 'Air';
+                		endif;
+                	endif;	
+                endfor;
+                
+                
+                
+                empty P_TotalDemand, P_TotalDemandPerSKU;
+                for (cs, sku, dt) do 
+                	P_TotalDemand(P_SKUGroup(sku)) := P_TotalDemand(P_SKUGroup(sku)) + P_CustomerDemand(cs, sku, dt);
+                	P_TotalDemandPerSKU(sku) := P_TotalDemandPerSKU(sku) + P_CustomerDemand(cs, sku, dt);
+                endfor;
+                
+                empty P_TotalDemandAll;
+                for(skug) do
+                	P_TotalDemandAll := P_TotalDemandAll + P_TotalDemand(skug);
+                endfor;
+                
+                ! Below will be adjusted based on model result
+                P_UnderCoverageWeight := 100;
+                P_ServiceLevelWeight := 100;
+                
+                !P_BigM := 10000000000;
+                P_BigM := P_TotalDemandAll;
+                
+                
+                
+                empty P_IsPiecewiseCostFunctionNeededForSKU;
+                for (sku) do
+                	for (seq) do 
+                		if (P_PieceWiseMaxQ(sku, seq) > 0) then
+                			P_IsPiecewiseCostFunctionNeededForSKU(sku) := 1;
+                			break;
+                		endif;
+                	endfor;
+                endfor;
+                
+                P_Distance(dc, cc) := P_All_LocationDistance(dc, cc);
+                !
+                !for (dt) do
+                !	if (dt = 'Normal') then
+                !		P_FixedNumberOfDC(dt) := P_NumFixedDC;
+                !	elseif (dt = 'Winter') then
+                !		P_FixedNumberOfDC(dt) := 0;
+                !	endif;
+                !endfor;
+                !
+                P_FixedNumberOfDC(dt):=P_NumFixedDC(dt);
+            }
+            Parameter P_RunningNumber;
+        }
+        Procedure BaseSolveFromStart {
+            Body: {
+                
+                !Read_Excel_Input;
+                !if(pro::DelegateToServer(CompletionCallback:'pro::session::LoadResultsCallback', waitforcompletion:1)) then
+                !                   return 1;
+                !endif;
+                
+                
+                !if(pro::DelegateToServer()) then
+                !                   return 1;
+                !endif;
+                !
+                !DCFootPrint_BaseModel.CallbackProcedure:='guipro::progress::UpdateCallBack';
+                !
+                !DCFootPrint_BaseModel.CallbackIterations:= 1000;
+                
+                UI_Setting;
+                Regression;
+                Calculation;
+                
+                Set_Model_Domain;
+                
+                Populate_Model_Input;
+                
+                !P_UnderCoverageWeight := 100;
+                !P_ServiceLevelWeight := 100;
+                !P_BigM := 10000000000;
+                
+                P_Actual_SolvingTimeLimit := P_UI_SolvingTimeLimit;
+                if (P_Actual_SolvingTimeLimit <= 5) then
+                	P_Actual_SolvingTimeLimit := 5;
+                !elseif (P_Actual_SolvingTimeLimit >= 30) then
+                !	P_Actual_SolvingTimeLimit := 30;
+                endif;
+                
+                OptionSetValue("Time Limit", P_Actual_SolvingTimeLimit*60);
+                
+                solve DCFootPrint_BaseModel;
+                
+                P_Solved := 1;
+                
+                PostProcess;
+                
+                !ExportResult;
+            }
+        }
+        Procedure Step1_GenerateDerivedData {
+            Body: {
+                UI_Setting;
+                Regression;
+                Calculation;
+                
+                Set_Model_Domain;
+                
+                Populate_Model_Input;
+            }
+        }
+        Procedure Step2_Solve {
+            Body: {
+                !P_UnderCoverageWeight := 100;
+                !P_ServiceLevelWeight := 100;
+                !P_BigM := 10000000000;
+                
+                P_Actual_SolvingTimeLimit := P_UI_SolvingTimeLimit;
+                if (P_Actual_SolvingTimeLimit <= 5) then
+                	P_Actual_SolvingTimeLimit := 5;
+                endif;
+                
+                OptionSetValue("Time Limit", P_Actual_SolvingTimeLimit*60);
+                
+                solve DCFootPrint_BaseModel;
+                
+                P_Solved := 1;
+                
+                PostProcess;
+                
+                !ExportResult;
+            }
+        }
+        Procedure Re_Calculate {
+            Body: {
+                UI_Setting;
+                
+                Calculation;
+                
+                Set_Model_Domain;
+                
+                Populate_Model_Input;
+            }
+        }
+        Procedure Re_Run {
+            Body: {
+                UI_Setting;
+                
+                Calculation;
+                
+                Set_Model_Domain;
+                
+                Populate_Model_Input;
+                
+                !P_UnderCoverageWeight := 100;
+                !P_ServiceLevelWeight := 100;
+                !P_BigM := 10000000000;
+                
+                P_Actual_SolvingTimeLimit := P_UI_SolvingTimeLimit;
+                if (P_Actual_SolvingTimeLimit <= 5) then
+                	P_Actual_SolvingTimeLimit := 5;
+                endif;
+                
+                OptionSetValue("Time Limit", P_Actual_SolvingTimeLimit*60);
+                
+                solve DCFootPrint_BaseModel;
+                
+                P_Solved := 1;
+                
+                PostProcess;
+                
+                !ExportResult;
+            }
+        }
+        Procedure SolveOnly {
+            Body: {
+                solve DCFootPrint_BaseModel;
+                
+                PostProcess;
+            }
+        }
+        DeclarationSection Map_Color_Declaration {
+            ElementParameter P_PlantFlowColor {
+                Range: AllColors;
+                InitialData: 'red';
+            }
+            ElementParameter P_DCFlowColor {
+                IndexDomain: mot;
+                Range: AllColors;
+                Definition: {
+                    if (mot = 'Truck') then 'Grey'
+                    else 'Blue'
+                    endif
+                }
+            }
+            ElementParameter P_PlantColor {
+                Range: AllColors;
+                InitialData: 'Red';
+            }
+            ElementParameter P_DCColor {
+                Range: AllColors;
+                InitialData: 'Yellow';
+            }
+            ElementParameter P_CustomerCityColor {
+                Range: AllColors;
+                InitialData: 'Black';
+            }
+        }
+    }
+    Section Report {
+        DeclarationSection Report_Declaration {
+            Parameter P_CoveringDistance {
+                IndexDomain: (dc,cc) | sum((sku, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt)) > 0;
+                Definition: P_Distance(dc, cc);
+            }
+            Parameter P_CoveragePlantDCTransportationCost {
+                IndexDomain: (pl,dc,sku) | sum(dt, V_Flow_PL_DC(pl, dc, sku, dt)) > 0;
+                Definition: P_PlantTransportationCost(pl, dc, sku);
+            }
+            Parameter P_CoverageDCCustomerTransportationCost {
+                IndexDomain: (dc, cc, sku, mot) | sum(dt, V_Flow_DC_CC(dc, cc, sku, mot, dt)) > 0;
+                Definition: P_DCTransportationCost(dc, cc, sku, mot);
+            }
+            Parameter P_DCFixedCostResultSum;
+            Parameter P_DCHandlingCostResultSum;
+            Parameter P_DCOperationalCostResultSum;
+            Parameter P_DCTransportationCostResultSum;
+            Parameter P_PlantTransportationCostResultSum;
+            Parameter P_SafetyStockCostResultSum;
+            Parameter P_TotalCost;
+            Parameter P_DCFlowCost {
+                IndexDomain: (dc,cc,sku,mot,dt);
+            }
+            Parameter P_MeetCoverageLevelDemand;
+            Parameter P_MeetCoverageLevelDemandPercentage;
+            Parameter P_MeetCoverageLevelDemandPercentageNew {
+                IndexDomain: skug;
+            }
+            Parameter P_MeetCoverageLevelDemandPercentage_Pharma;
+            Parameter P_IsFlowNotWithinServiceRange {
+                IndexDomain: (dc,cc,sku,mot,dt)|v_flow_dc_cc(dc,cc,sku,mot,dt);
+                Definition: {
+                    if(P_MOTMeetCoverageServiceLevel(dc,cc,sku)=mot) then
+                    0
+                    else
+                    1
+                    endif
+                }
+            }
+            ElementParameter P_ActualServiceLevel {
+                IndexDomain: (dc,cc,sku,mot,dt);
+                Range: S_All_ServiceLevel;
+            }
+            ElementParameter P_UI_ActualServiceLevel {
+                IndexDomain: (dc,cc,sku,mot,dt) | v_flow_dc_cc(dc,cc,sku,mot,dt);
+                Range: S_All_ServiceLevel;
+                Definition: P_ActualServiceLevel(dc,cc,sku,mot,dt);
+            }
+            Parameter P_meetServiceLvelVolume {
+                IndexDomain: skug;
+                Definition: SUM((dc,cc,sku,mot,dt) | p_skugroup(sku)=skug and P_IsFlowNotWithinServiceRange(dc,cc,sku,mot,dt) = 0, v_flow_dc_cc(dc,cc,sku,mot,dt));
+            }
+            Parameter P_notMeetServiceLvelVolume {
+                IndexDomain: skug;
+                Definition: SUM((dc,cc,sku,mot,dt) | p_skugroup(sku) = skug and P_IsFlowNotWithinServiceRange(dc,cc,sku,mot,dt) = 1, v_flow_dc_cc(dc,cc,sku,mot,dt));
+            }
+        }
+        Procedure PostProcess {
+            Body: {
+                empty P_DCFixedCostResultSum, P_DCHandlingCostResultSum, P_DCOperationalCostResultSum, P_DCTransportationCostResultSum;
+                empty P_PlantTransportationCostResultSum, P_SafetyStockCostResultSum, P_TotalCost;
+                empty P_DCFlowCost;
+                empty P_IsDCSelectedForDemandType;
+                
+                P_DCFixedCostResultSum := V_DCFixedCost;
+                P_DCHandlingCostResultSum := V_DCHandlingCost;
+                P_DCOperationalCostResultSum := V_DCOperationalCost;
+                P_DCTransportationCostResultSum := V_DCTransportationCost;
+                P_PlantTransportationCostResultSum := V_PlantTransportationCost;
+                P_SafetyStockCostResultSum := V_SafetyStockCost;
+                P_TotalCost := V_Objective;
+                
+                P_DCFlowCost(dc, cc, sku, mot, dt) := V_Flow_DC_CC(dc, cc, sku, mot, dt) * P_DCTransportationCost(dc, cc, sku, mot) 
+                										 * P_DCTransportationCostMultiplier(dc, cc, sku, mot);
+                
+                for(dc, cc, mot) do
+                	for (allsl) do
+                		if (P_All_ServiceLevelHrs(allsl) >= P_All_LocationDistance(dc, cc) / P_All_TravelSpeed(mot)) then
+                			P_ActualServiceLevel(dc, cc, sku, mot, dt) := allsl;
+                			break;
+                		endif;
+                	endfor;
+                endfor;
+                
+                P_IsDCSelectedForDemandType(alldc, alldt) := 0;
+                P_IsDCSelectedForDemandType(dc, dt) := V_DC(dc, dt);
+                
+                empty P_DCSafetyStock, P_DCSafetyStockCost, P_DCCycleStock, P_DCCycleStockCost;
+                for(dc, sku) do
+                	if (P_TotalDemandPerSKU(sku) > 0) then
+                		P_DCSafetyStock(dc, sku) := (sum((cc, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt)) / P_TotalDemandPerSKU(sku)) *
+                			     	     	     sum((seq, dt), V_BinaryNumDC(dt, seq) * P_SafetyStock(seq) * P_SingleDCSafetyStockLevel(sku));
+                	endif; 
+                	P_DCSafetyStockCost(dc, sku) := P_DCSafetyStock(dc, sku) * P_AnnualExpiryRate(sku) * P_UnitValue(sku);
+                
+                	P_DCCycleStock(dc, sku) := sum((cc, mot, dt), V_Flow_DC_CC(dc, cc, sku, mot, dt)) * P_CycleStockRate(sku);
+                	P_DCCycleStockCost(dc, sku) := P_DCCycleStock(dc, sku) * P_AnnualExpiryRate(sku) * P_UnitValue(sku);
+                endfor;
+                
+                !Calculate_MeetCoverageLevel
+                P_MeetCoverageLevelDemand := sum((dc, cc, sku, mot, dt) | mot = P_MOTMeetCoverageServiceLevel(dc, cc, sku), V_Flow_DC_CC(dc, cc, sku, mot, dt));
+                
+                !for(skug) do
+                	if(sum(skug, P_TotalDemand(skug)) > 0) then
+                		P_MeetCoverageLevelDemandPercentage := P_MeetCoverageLevelDemand / sum(skug, P_TotalDemand(skug));
+                	endif;
+                !endfor;
+                
+                for(skug) do
+                	if(P_TotalDemand(skug)) then
+                		P_MeetCoverageLevelDemandPercentageNew(skug) := P_meetServiceLvelVolume(skug) / P_TotalDemand(skug);
+                	endif;
+                endfor;
+            }
+        }
+        Procedure ExportResult {
+            Body: {
+                empty P_Report_PlantDCDistance, P_Report_DCCustomerCityDistance;
+                
+                P_Report_PlantDCDistance(allpl, alldc) := P_All_LocationDistance(allpl, alldc);
+                P_Report_DCCustomerCityDistance(alldc, allcc) := P_All_LocationDistance(alldc, allcc);
+                
+                Result_FileName := "Result.xlsx";
+                
+                numRows := 1000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Plant DC Distance");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_Report_PlantDCDistance, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Plant DC UnitTransportationCost");
+                rowRangeStr := formatString("A2:C%i",numRows);
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_PlantTransportationCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC CustomerCity Distance");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_Report_DCCustomerCityDistance, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC CustomerCity UnitTransCost");
+                rowRangeStr := formatString("A2:D%i",numRows);
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCTransportationCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                
+                
+                
+                
+                numRows := 100;
+                
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Selected DC");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_IsDCSelectedForDemandType, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Result Cost");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_DCFixedCost, "B2");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_DCHandlingCost, "B3");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_DCOperationalCost, "B4");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_DCTransportationCost, "B5");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_PlantTransportationCost, "B6");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_SafetyStockCost, "B7");
+                SpreadSheet::AssignValue(Workbook:Result_FileName, V_Objective, "B8");
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC Coverage");
+                rowRangeStr := formatString("A2:E%i",numRows);
+                dataRangeStr := formatString("F2:F%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:V_Flow_DC_CC, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:0, ColumnMode:3);
+                
+                dataRangeStr := formatString("G2:G%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCFlowCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                dataRangeStr := formatString("H2:H%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_IsFlowNotWithinServiceRange, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                dataRangeStr := formatString("I2:I%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_UI_ActualServiceLevel, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                !SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Not Within Service Range");
+                !rowRangeStr := formatString("A2:E%i",numRows);
+                !dataRangeStr := formatString("F2:F%i", numRows);
+                !SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_IsFlowNotWithinServiceRange, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, ColumnMode:3);
+                
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC Stock");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCCycleStock, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:0, ColumnMode:3);
+                
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCCycleStockCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCSafetyStock, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                dataRangeStr := formatString("F2:F%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCSafetyStockCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, Sparse:1, RowMode:2, ColumnMode:3);
+                
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Plant Coverage");
+                rowRangeStr := formatString("A2:D%i",numRows);
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:V_Flow_PL_DC, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                
+                Spreadsheet::CloseWorkbook(Result_FileName, 1);
+            }
+            StringParameter Result_FileName;
+            Parameter numRows;
+            StringParameter rowRangeStr;
+            StringParameter dataRangeStr;
+            Parameter P_Report_PlantDCDistance {
+                IndexDomain: (allpl,alldc);
+            }
+            Parameter P_Report_DCCustomerCityDistance {
+                IndexDomain: (alldc,allcc);
+            }
+        }
+        Procedure ExportDerivedData {
+            Body: {
+                empty P_Report_PlantDCDistance, P_Report_DCCustomerCityDistance;
+                
+                P_Report_PlantDCDistance(allpl, alldc) := P_All_LocationDistance(allpl, alldc);
+                P_Report_DCCustomerCityDistance(alldc, allcc) := P_All_LocationDistance(alldc, allcc);
+                
+                Result_FileName := "Result.xlsx";
+                
+                numRows := 1000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Plant DC Distance");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_Report_PlantDCDistance, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"Plant DC UnitTransportationCost");
+                rowRangeStr := formatString("A2:C%i",numRows);
+                dataRangeStr := formatString("D2:D%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_PlantTransportationCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC CustomerCity Distance");
+                rowRangeStr := formatString("A2:B%i",numRows);
+                dataRangeStr := formatString("C2:C%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_Report_DCCustomerCityDistance, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                numRows := 500000;
+                SpreadSheet::SetActiveSheet(Workbook:Result_FileName, Name:"DC CustomerCity UnitTransCost");
+                rowRangeStr := formatString("A2:D%i",numRows);
+                dataRangeStr := formatString("E2:E%i", numRows);
+                SpreadSheet::AssignTable(Workbook:Result_FileName, Parameter:P_DCTransportationCost, DataRange:dataRangeStr, RowsRange:rowRangeStr, ColumnMode:3);
+                
+                
+                
+                Spreadsheet::CloseWorkbook(Result_FileName, 1);
+            }
+            StringParameter Result_FileName;
+            Parameter numRows;
+            StringParameter rowRangeStr;
+            StringParameter dataRangeStr;
+            Parameter P_Report_PlantDCDistance {
+                IndexDomain: (allpl,alldc);
+            }
+            Parameter P_Report_DCCustomerCityDistance {
+                IndexDomain: (alldc,allcc);
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return DataManagementExit();
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            Read_Excel_Input;
+            Populate_Model_Input;
+            
+            solve DCFootPrint_BaseModel;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

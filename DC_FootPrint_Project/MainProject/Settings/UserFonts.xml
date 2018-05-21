@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<UserFonts>
+	<UserFont Name="Main Font" FaceName="Arial Narrow" PointSize="90" Bold="true" UUID="00000000-0000-0000-0000-000000000001" />
+	<UserFont Name="Navigation Object Font" FaceName="Arial" PointSize="200" Bold="true" UUID="E8F0E142-DE83-4DA0-B70D-410CB18E800E" InternalID="1" />
+	<UserFont Name="sub-menu" FaceName="Arial Narrow" PointSize="120" Bold="true" UUID="2322076E-6115-4DCD-8D0C-FDBB311606F8" InternalID="2" />
+	<UserFont Name="Menu" FaceName="Arial Narrow" PointSize="160" Bold="true" UUID="5EA746F4-FA39-4CCC-A6A1-7D59E9B9FDCC" InternalID="3" />
+	<UserFont Name="Table" FaceName="Arial Narrow" PointSize="90" Bold="true" UUID="6AFD7F55-C245-46A6-A6B8-125F9E2AAA88" InternalID="4" />
+	<UserFont Name="Text Box" FaceName="Arial Narrow" PointSize="120" Bold="true" UUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" InternalID="5" />
+	<UserFont Name="Read Button" FaceName="Arial Narrow" PointSize="110" Bold="true" UUID="066C4A46-9A7B-4C60-836E-DA4B985DFA3D" InternalID="6" />
+	<UserFont Name="Run" FaceName="Arial Narrow" PointSize="280" Bold="true" UUID="1B75EABB-4EFF-410A-9A3E-E11207EE98A5" InternalID="7" />
+	<UserFont Name="two step solve" FaceName="Arial Narrow" PointSize="110" Bold="true" UUID="8F9CEB78-8382-4C71-BC62-6773D9DFB334" InternalID="8" />
+</UserFonts>

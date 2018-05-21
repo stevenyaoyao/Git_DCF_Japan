@@ -1,0 +1,23 @@
+﻿* AIMMS
+infeasibility_finder on
+solver_listing_messages 4
+time_limit 300
+* AOA
+* BARON 15
+* CBC 2.9
+* CONOPT 3.14V
+* CPLEX 12.7
+"CPLEX 12.7".MIP_display 2
+* CPOptimizer 12.7
+* IPOPT 3.11
+* Knitro 10.2
+* MINOS
+* SNOPT 7.2
+* XA 16
+* CPLEX 12.6.3
+"CPLEX 12.6.3".global_thread_limit 3
+"CPLEX 12.6.3".MIP_display 2
+"CPLEX 12.6.3".MIP_interval 1
+* NETSOL
+* Environment
+Startup_Page "Input Data Page"

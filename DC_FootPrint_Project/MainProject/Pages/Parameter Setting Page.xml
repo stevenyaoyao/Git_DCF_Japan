@@ -1,0 +1,984 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2017-08-17 15:34:04">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>22F16045-BEE8-4714-8647-122D40CABC1D</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Pivot Table">
+		<Location top="126" left="270" bottom="276" right="594" />
+		<TabOrder>2</TabOrder>
+		<ObjectUUID>F95201EF-15A2-4F11-B391-34D3A7352EA1</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_UI_SKUCategorySelectedCoverageRange( allskuc )</Identifier>
+				<Title ID="4120">"Coverage Range"</Title>
+				<Procedures_Assertions>
+					<On_Change ID="4181">WarnningOnLongerCoverageLevel</On_Change>
+				</Procedures_Assertions>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_UI_SKUCategorySelectedServiceLevel( allskuc )</Identifier>
+				<Title ID="4120">"Service Level"</Title>
+				<Procedures_Assertions>
+					<On_Change ID="4181">WarnningOnShorterServiceLevel</On_Change>
+				</Procedures_Assertions>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">allskuc</Index>
+				<Header_Title ID="6530">"SKU Category"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="96" left="270" bottom="126" right="636" />
+		<StaticText>Choose Coverage Range and Service Level</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="96" left="624" bottom="126" right="774" />
+		<StaticText>Set Servive Target</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="126" left="624" bottom="276" right="858" />
+		<TabOrder>4</TabOrder>
+		<ObjectUUID>E9B3F011-C9CB-4447-B160-549AD23DCC9D</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_ServiceLevelMeetingTarget( allskug )</Identifier>
+				<Title ID="4120">"Meeting Target"</Title>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">allskug</Index>
+				<Header_Title ID="6530">"SKU Group"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="648" left="426" bottom="678" right="612" />
+		<StaticText>Set Demand Multiplier</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="678" left="426" bottom="714" right="480" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>P_UI_DemandMultiplier</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="96" left="1224" bottom="114" right="1440" />
+		<StaticText>Set Number of Fixed DC</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="120" left="1224" bottom="234" right="1530" />
+		<TabOrder>10</TabOrder>
+		<ObjectUUID>95D6CC03-3513-4A18-B410-825F2BCF84CA</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_NumFixedDC( alldt )</Identifier>
+				<Title ID="4120">"Fix Number of DC"</Title>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">alldt</Index>
+				<Header_Title ID="6530">"Demand Type"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Font ExtraInfo="6AFD7F55-C245-46A6-A6B8-125F9E2AAA88" ID="2045">"Table"</Font>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="96" left="30" bottom="126" right="240" />
+		<StaticText>Select SKU Category</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="126" left="30" bottom="276" right="240" />
+		<TabOrder>11</TabOrder>
+		<ObjectUUID>6D04DBC0-476C-4BEC-814D-331759342993</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_ToIncludeSKUCInRun( allskuc )</Identifier>
+				<Title ID="4120">"Include"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">allskuc</Index>
+				<Header_Title ID="6530">"SKU Category"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="474" left="426" bottom="528" right="618" />
+		<StaticText>Set DC Transportation Cost Multiplier</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="534" left="426" bottom="570" right="480" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>P_UI_DCTransCostMultiplier</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="618" left="1224" bottom="732" right="1350" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Run"</Title>
+		<BackgroundColor RGB="#80ff80" />
+		<ForegroundColor RGB="#000000" />
+		<Font GUID="1B75EABB-4EFF-410A-9A3E-E11207EE98A5" Name="Run" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>BaseSolveFromStart</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="336" left="30" bottom="444" right="414" />
+		<TabOrder>12</TabOrder>
+		<ObjectUUID>434684D5-E64E-41A6-968E-EF580133D6A5</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_OneDayCoverageDistance( allmot )</Identifier>
+				<Title ID="4120">"One Day Coverage Distance (KM)"</Title>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Explicit_Index>
+				<Index ID="6510">allmot</Index>
+				<Header_Title ID="6530">"Mode of Transport"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="306" left="30" bottom="336" right="324" />
+		<StaticText>Set One Day Coverage Distance</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="504" left="30" bottom="624" right="414" />
+		<TabOrder>13</TabOrder>
+		<ObjectUUID>2E417F9B-DCA1-4E5F-85E1-6D344425AE54</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_All_VaccineDCTransportCostPerTruckPerKM</Identifier>
+				<Title ID="4120">"Vaccine DC Transportation Cost Per Truck Per KM"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_All_NumberOfVaccineCDCPerDay</Identifier>
+				<Title ID="4120">"Number Of Vaccine CDC Per Day"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_All_ExtraCostPerStop</Identifier>
+				<Title ID="4120">"Extra Cost Per Stop"</Title>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Identifier_Index>
+				<Header_Title ID="6230">"Parameters"</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="474" left="30" bottom="504" right="408" />
+		<StaticText>Set Vaccine Truck Transportation Parameters</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="648" left="30" bottom="678" right="210" />
+		<StaticText>Select Demand Type</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="672" left="30" bottom="780" right="300" />
+		<TabOrder>14</TabOrder>
+		<ObjectUUID>6C48733C-CC08-4385-A64D-9E073A07A41C</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_ToIncludeDemandType( alldt )</Identifier>
+				<Title ID="4120">"Include"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">alldt</Index>
+				<Header_Title ID="6530">"Demand Type"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="336" left="642" bottom="444" right="858" />
+		<TabOrder>15</TabOrder>
+		<ObjectUUID>0145BA66-8B8E-4A73-A146-3DFC66A19675</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_All_CanUseAirFlag</Identifier>
+				<Title ID="4120">"Can Use Air ?"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Identifier_Index>
+				<Header_Title ID="6230">"Control Air MOT Usuage"</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="306" left="642" bottom="330" right="852" />
+		<StaticText>Control Air MOT Usuage</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="120" left="876" bottom="792" right="1218" />
+		<TabOrder>16</TabOrder>
+		<ObjectUUID>C97A6C50-CE78-431E-81BB-5D9C883A7D1C</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_ToIncludePotentialDC( alldc )</Identifier>
+				<Title ID="4120">"Include"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_UI_PrefixedDC( alldc, alldt )</Identifier>
+				<Title ID="4120">"Prefixed"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_UI_IsDCAllowAir( alldc )</Identifier>
+				<Title ID="4120">"Allow Air"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">alldc</Index>
+				<Header_Title ID="6530">"Potential DC"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="240" left="1224" bottom="294" right="1524" />
+		<TabOrder>17</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Set Previous Selected DCs as Potential DCs"</Title>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>ChooseSelectedDCsAsPotential</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="1224" bottom="348" right="1524" />
+		<TabOrder>18</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Reset All DCs as Potential DCs"</Title>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>ResetAllDC</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="90" left="18" bottom="288" right="870" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#80ff00" />
+		<LineWidth>3</LineWidth>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="300" left="18" bottom="456" right="870" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#80ff00" />
+		<LineWidth>3</LineWidth>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="468" left="18" bottom="630" right="606" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#80ff00" />
+		<LineWidth>3</LineWidth>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="96" left="876" bottom="126" right="1212" />
+		<StaticText>Set Potential DC, Prefixed DC, Allow Air</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="642" left="18" bottom="792" right="606" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#80ff00" />
+		<LineWidth>3</LineWidth>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="552" left="1356" bottom="588" right="1410" />
+		<TabOrder>19</TabOrder>
+		<Font GUID="2322076E-6115-4DCD-8D0C-FDBB311606F8" Name="sub-menu" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>P_UI_SolvingTimeLimit</Identifier>
+			<NumberFormat Width="7" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="558" left="1224" bottom="594" right="1374" />
+		<StaticText>Set Solving Time Limit (minutes)</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="738" left="1224" bottom="792" right="1530" />
+		<TabOrder>9</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Check Status"</Title>
+		<BackgroundColor RGB="#80ff80" />
+		<ForegroundColor RGB="#000000" />
+		<Font GUID="1B75EABB-4EFF-410A-9A3E-E11207EE98A5" Name="Run" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>guipro::OpenRequestManagement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="498" left="642" bottom="792" right="858" />
+		<TabOrder>20</TabOrder>
+		<ObjectUUID>47123BBB-968A-4A90-AC1F-9A4537F5942F</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_UI_IsRegionAllowAir( allr )</Identifier>
+				<Title ID="4120">"Allow Air"</Title>
+				<Format>
+					<Show_Checkboxes ID="4315">"Yes"</Show_Checkboxes>
+				</Format>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Explicit_Index>
+				<Index ID="6510">allr</Index>
+				<Header_Title ID="6530">"Region"</Header_Title>
+			</Explicit_Index>
+			<Identifier_Index>
+				<Header_Title ID="6230">""</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="462" left="642" bottom="486" right="870" />
+		<StaticText>Control Region Air Usuage</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Pivot Table">
+		<Location top="378" left="1224" bottom="546" right="1530" />
+		<TabOrder>21</TabOrder>
+		<ObjectUUID>8169FB78-2B24-4CD0-830F-CD8281412EC2</ObjectUUID>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<Contents>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_DCFixedCost</Identifier>
+				<Title ID="4120">"Weightage-DC Fixed Cost"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_DCHandlingCost</Identifier>
+				<Title ID="4120">"Weightage-DC Handing Cost"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_DCOperationalCost</Identifier>
+				<Title ID="4120">"Weightage-DC Operational Cost"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_DCTransportationCost</Identifier>
+				<Title ID="4120">"Weightage-DC Transportation Cost"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_PlantTransportationCost</Identifier>
+				<Title ID="4120">"Weightage-Plant Transportation Cost"</Title>
+			</Explicit_Identifier>
+			<Explicit_Identifier>
+				<Identifier ID="4110">P_Weight_DCSafetyStockCost</Identifier>
+				<Title ID="4120">"Weightage-DC Safety Stock Cost"</Title>
+			</Explicit_Identifier>
+		</Contents>
+		<Indices>
+			<Defaults>
+				<Show_All_Elements ID="6150">1</Show_All_Elements>
+			</Defaults>
+			<Identifier_Index>
+				<Header_Title ID="6230">"Weightage of each cost"</Header_Title>
+				<Hide_if_Single_Identifier ID="6270">"No"</Hide_if_Single_Identifier>
+			</Identifier_Index>
+		</Indices>
+		<General>
+			<Dense_Aggregation_restricts_to_Domain ID="1022">"Yes"</Dense_Aggregation_restricts_to_Domain>
+		</General>
+		<Row_Area>
+			<Background_Color ID="2010">RGB&lt;255,255,200&gt;</Background_Color>
+			<Text_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2020">"default selection"</Text_Color>
+			<Headers>
+				<Background_Color ExtraInfo="D4F48705-BFDF-4DF8-8E1F-D38EFF981024" ID="2120">"default selection"</Background_Color>
+				<Text_Color ID="2130">RGB&lt;255,255,255&gt;</Text_Color>
+				<Show_Sub_Headers ID="2150">"No"</Show_Sub_Headers>
+			</Headers>
+			<Grid_Focus_Indicator>
+				<Background_Color ID="2270">RGB&lt;0,0,168&gt;</Background_Color>
+				<Text_Color ID="2280">RGB&lt;255,255,200&gt;</Text_Color>
+			</Grid_Focus_Indicator>
+		</Row_Area>
+		<Column_Area>
+			<Headers>
+				<Show_Sub_Headers ID="3150">"No"</Show_Sub_Headers>
+			</Headers>
+		</Column_Area>
+		<Grid_Area>
+			<Background_Color ID="5010">RGB&lt;255,255,255&gt;</Background_Color>
+			<Alternating_Background_Color ID="5011">RGB&lt;225,225,225&gt;</Alternating_Background_Color>
+			<Aggregators>
+				<Background_Color ID="5220">RGB&lt;255,128,128&gt;</Background_Color>
+			</Aggregators>
+			<Sub_Header_Row_or_Column>
+				<Background_Color ID="5320">RGB&lt;255,255,200&gt;</Background_Color>
+			</Sub_Header_Row_or_Column>
+		</Grid_Area>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="348" left="1224" bottom="372" right="1518" />
+		<StaticText>Set Weightage of Cost Component</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="588" left="1224" bottom="624" right="1356" />
+		<StaticText>Solve Directly</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="588" left="1392" bottom="624" right="1494" />
+		<StaticText>Two Steps</StaticText>
+		<Font GUID="2E658CA3-ABC6-45E3-B1E0-53446A561E7F" Name="Text Box" />
+		<TextColor RGB="#80ffff" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="684" left="1392" bottom="732" right="1524" />
+		<TabOrder>8</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Run"</Title>
+		<BackgroundColor RGB="#80ff80" />
+		<ForegroundColor RGB="#000000" />
+		<Font GUID="8F9CEB78-8382-4C71-BC62-6773D9DFB334" Name="two step solve" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Step2_Solve</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="618" left="1392" bottom="666" right="1524" />
+		<TabOrder>7</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Get Derived Data"</Title>
+		<BackgroundColor RGB="#80ff80" />
+		<ForegroundColor RGB="#000000" />
+		<Font GUID="8F9CEB78-8382-4C71-BC62-6773D9DFB334" Name="two step solve" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Step1_GenerateDerivedData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>P_ServiceLevelMeetingTarget</Symbol>
+			<Symbol>P_All_VaccineDCTransportCostPerTruckPerKM</Symbol>
+			<Symbol>P_All_NumberOfVaccineCDCPerDay</Symbol>
+			<Symbol>P_All_ExtraCostPerStop</Symbol>
+			<Symbol>P_ToIncludeSKUCInRun</Symbol>
+			<Symbol>P_UI_SKUCategorySelectedCoverageRange</Symbol>
+			<Symbol>P_UI_SKUCategorySelectedServiceLevel</Symbol>
+			<Symbol>P_OneDayCoverageDistance</Symbol>
+			<Symbol>P_All_CanUseAirFlag</Symbol>
+			<Symbol>P_ToIncludeDemandType</Symbol>
+			<Symbol>P_UI_DemandMultiplier</Symbol>
+			<Symbol>P_UI_DCTransCostMultiplier</Symbol>
+			<Symbol>P_NumFixedDC</Symbol>
+			<Symbol>P_ToIncludePotentialDC</Symbol>
+			<Symbol>P_UI_PrefixedDC</Symbol>
+			<Symbol>P_UI_SolvingTimeLimit</Symbol>
+			<Symbol>P_UI_IsRegionAllowAir</Symbol>
+			<Symbol>P_UI_IsDCAllowAir</Symbol>
+			<Symbol>P_Weight_DCFixedCost</Symbol>
+			<Symbol>P_Weight_DCHandlingCost</Symbol>
+			<Symbol>P_Weight_DCOperationalCost</Symbol>
+			<Symbol>P_Weight_DCTransportationCost</Symbol>
+			<Symbol>P_Weight_PlantTransportationCost</Symbol>
+			<Symbol>P_Weight_DCSafetyStockCost</Symbol>
+			<Symbol>ChooseSelectedDCsAsPotential</Symbol>
+			<Symbol>ResetAllDC</Symbol>
+			<Symbol>WarnningOnLongerCoverageLevel</Symbol>
+			<Symbol>WarnningOnShorterServiceLevel</Symbol>
+			<Symbol>BaseSolveFromStart</Symbol>
+			<Symbol>Step1_GenerateDerivedData</Symbol>
+			<Symbol>Step2_Solve</Symbol>
+			<Symbol>guipro::OpenRequestManagement</Symbol>
+			<Symbol>alldc</Symbol>
+			<Symbol>allr</Symbol>
+			<Symbol>alldt</Symbol>
+			<Symbol>allskug</Symbol>
+			<Symbol>allskuc</Symbol>
+			<Symbol>allmot</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
